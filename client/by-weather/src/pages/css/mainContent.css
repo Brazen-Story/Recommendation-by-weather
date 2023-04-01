@@ -1,0 +1,92 @@
+
+li{
+    background-color: white;
+    border-color: white;
+    border-radius: 10px;
+    width : 600px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul{
+    list-style:none;
+}
+
+.weatherData{
+    text-align: center;
+    margin: 0%;
+    
+}
+
+.icon{
+    height: 50px;
+    width: 50px;
+}
+
+p.weatherData {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  img.icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px; /* 이미지와 텍스트 사이 간격 조절 */
+  }
+
+.title{
+    text-align: center;
+    margin: 0%;
+    background-color: black;
+    color: white;
+    border-radius: 30px;
+    width:87%;
+    margin-left: 57px;
+}
+
+.btn {
+    background-color: #f6f8fa;
+    border-color: rgba(27,31,36,0.15);
+    border-radius: 10px;
+    padding: 4px 15px;
+    position: relative; /* 필수 */
+    margin-top: 5px;
+  }
+  
+  .btn img {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: px;
+    height: 15px;
+    margin-right: 10px;
+  }
+
+ .btn span {
+    margin-left: 18px;
+    font-weight: bold;
+    font-size: 11px;
+ }
+
+ .btn:hover{
+    background-color: #e6ebf1;
+ }
+ li > div:first-child {
+    text-align: left;
+  }
+  
+  li > div:last-child {
+    text-align: right;
+  }
+
+  li div{
+    display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  }

@@ -1,0 +1,103 @@
+.options {
+    clear: both;
+    line-height: 30px;
+}
+
+.tab_title{
+    font-family: Georgia; /* 원하시는 세리프체 폰트를 지정해주세요 */
+    font-weight: bold; /* 품목 부분에 굵은체 효과를 주기 위해 사용 */
+    font-size: 18px; /* 원하시는 글자 크기를 지정해주세요 */
+    text-align: center; /* 제목을 중앙 정렬합니다 */
+    letter-spacing: 5px; /* 글자 사이의 간격을 늘려서 강조합니다 */
+    margin-bottom: 20px;
+    margin-top:20px;
+}
+
+.tab_btn {
+    height:50px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 3px;
+}
+
+.tab_btn:hover{
+    background-color: #e8e9e8;
+    cursor: pointer;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+textarea{
+    width: 221px;
+    height: 110px;
+    max-height: 110px;
+    padding: 15px;
+    
+    background: transparent;
+    outline: none;
+    
+    color: #726659;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875em;
+    
+    border: solid 1px #b3aca7;
+    
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    
+}
+
+textarea:hover {
+    background: #b3aca7;
+    color: #e2dedb;
+  }
+
+.Htitle{
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 40px;
+}
+
+
+.submit_btn{
+    background-color: #f6f8fa;
+    border-color: rgba(27,31,36,0.15);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 7px 16px;
+    margin-left: 179px; /* 필요에 따라 여백 조정 */
+    border-radius: 10px;
+    position: relative; /* 필수 */
+
+}
+
+.submit_btn img {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: px;
+    height: 15px;
+    margin-right: 10px;
+  }
+
+  .submit_btn span {
+    margin-left: 18px;
+    font-weight: bold;
+    font-size: 12px;
+ }
+
+ .submit_btn:hover{
+    background-color: #e6ebf1;
+ }
+
+ @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Delicious+Handrawn&display=swap');

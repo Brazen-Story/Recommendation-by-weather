@@ -1,0 +1,23 @@
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Main from "./pages/Main";
+import DataUpdatePage from "./pages/DataUpdatePage";
+import Manager from "./pages/Manager";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/manager" element={<Manager />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/Register" element={<Register />} />
+        <Route exact path="/" element={<Main />} />
+        <Route exact path="/DataUpdatePage" element={<DataUpdatePage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
