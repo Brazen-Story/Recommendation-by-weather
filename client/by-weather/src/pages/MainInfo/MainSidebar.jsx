@@ -150,9 +150,7 @@ function MainSidebar(props) {
 
           <br />
 
-          {/* <button onClick={submit} className="submit_btn"> 저장 </button>           {" "} */}
-
-          <button className="btn" onClick={submit}>
+          <button className="btn" id="save_btn" onClick={submit}>
             <img src={save} alt="icon" /> <span> 저장 </span>  </button>
 
           <div>

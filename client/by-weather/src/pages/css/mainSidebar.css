@@ -137,11 +137,16 @@ textarea:hover {
 
   #menubtn1{
     position: absolute;
-    top: 84%;
+    top: 83%;
 }
 
   #menubtn2{
     position: absolute;
-    top: 89%;
+    top: 88%;
   }
 
+  #save_btn{
+    height:35px;
+    width: 100px;
+    margin-left: 155px;
+  }

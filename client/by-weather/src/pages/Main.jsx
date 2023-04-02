@@ -3,7 +3,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "moment/locale/ko";
 import MainSidebar from "./MainInfo/MainSidebar";
 import MainContent from "./MainInfo/MainContent";
-import MainHeader from "./MainInfo/MainHeader";
 import "./css/main.css"
 
 function Main(props) {
@@ -58,7 +57,6 @@ useEffect(() => {
   return (
     <> 
     <div className="All" style={{backgroudColor:"#F4F4F5",display: "flex"}}>
-    <MainHeader />
     <MainSidebar main={weatherData}/>
     <MainContent main={weatherData}/>
     </div>

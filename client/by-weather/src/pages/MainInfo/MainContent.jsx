@@ -1,6 +1,6 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "moment/locale/ko";
@@ -65,7 +65,7 @@ function MainContent(props) {
                 <div className="All">
                     <div className="title">
                         <p className="weatherData">
-                            {props.main.place}{" : "} 
+                            {props.main.place}{" : "}
                             기온 : {props.main.temp}°C{" | "}
                             체감 : {props.main.feelsLike}°C{" | "}
                             {props.main.rain === undefined ? null : "강수량 : " + props.main.rain + " | "}
@@ -76,22 +76,21 @@ function MainContent(props) {
                     </div>
                     {mainData.length > 0 && (
                         <ul>
-                            {mainData.map((item, index) => (
-                                <li key={index.id}>
-                                    {item.temperature} <br />
-                                    {item.date}<br />
-                                    {item.state}<br />
-                                    {item.fashion}<br />
-                                    <div>
-                                    <button className="btn" onClick={() => dataMove(item.temperature, item.name)}>
+                            {mainData.sort((a, b) => new Date(b.date) - new Date(a.date)).map((item, index) => (<li key={index.id}>
+                                기온 : {item.temperature}°C<br />
+                                날짜 : {item.date}<br />
+                                날씨 : {item.state}<br />
+                                옷 : {item.fashion.replace(",", ", ")}<br />
+                                <div className="double_btn">
+                                    <button className="body_btn" onClick={() => dataMove(item.temperature, item.name)}>
                                         <img src={edit} alt="icon" /> <span> 수정 </span>  </button>
-                                    
+
                                     {" "}
-                                    <button className="btn" onClick={() => deleteItem(item.temperature, item.name, item.date)}>
-                                    <img src={del} alt="icon" /> <span> 삭제 </span> </button>
-                                    </div>
-                                    
-                                </li>
+                                    <button className="body_btn" onClick={() => deleteItem(item.temperature, item.name, item.date)}>
+                                        <img src={del} alt="icon" /> <span> 삭제 </span> </button>
+                                </div>
+
+                            </li>
                             ))}
                         </ul>
                     )}

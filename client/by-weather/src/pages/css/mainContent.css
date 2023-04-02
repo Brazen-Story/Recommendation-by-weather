@@ -48,16 +48,17 @@ p.weatherData {
     margin-left: 57px;
 }
 
-.btn {
+.body_btn {
     background-color: #f6f8fa;
     border-color: rgba(27,31,36,0.15);
     border-radius: 10px;
     padding: 4px 15px;
     position: relative; /* 필수 */
     margin-top: 5px;
+    margin-left: none;
   }
   
-  .btn img {
+  .body_btn img {
     position: absolute;
     left: 15px;
     top: 50%;
@@ -67,13 +68,13 @@ p.weatherData {
     margin-right: 10px;
   }
 
- .btn span {
+ .body_btn span {
     margin-left: 18px;
     font-weight: bold;
     font-size: 11px;
  }
 
- .btn:hover{
+ .body_btn:hover{
     background-color: #e6ebf1;
  }
  li > div:first-child {
@@ -89,4 +90,8 @@ p.weatherData {
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
+  }
+
+  .double_btn{
+    width: 20%;
   }
