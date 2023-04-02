@@ -11,15 +11,15 @@ app.use(express.json());
 
 
 const connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'kim0523',
-  database : 'byWeather',
+  host: 'localhost',
+  user: 'root',
+  password: 'kim0523',
+  database: 'byWeather',
   multipleStatements: true,
 });
- 
+
 connection.connect();
- 
+
 var user = "SELECT * FROM USER;";
 var report = "SELECT * FROM REPORT;"
 
@@ -34,49 +34,56 @@ app.post("/create", (req, res) => { //회원가입 로그인페이지
   const username = req.body.username;
   const password = req.body.password;
 
-  const InsertUserSql =  "INSERT INTO user (id, pw, name, phone_number) VALUES (?,?,?,?);";
+  const InsertUserSql = "INSERT INTO user (id, pw, name, phone_number) VALUES (?,?,?,?);";
   const CreateUser = [id, password, username, phoneNumber];
 
   connection.query(InsertUserSql, CreateUser, (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send("Values Inserted");
-      }
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("Values Inserted");
     }
+  }
   );
 });
 
 app.post("/login", (req, res) => { //로그인 로그인페이지
 
   const id = req.body.id;
-  const LoginSql = "SELECT * FROM USER WHERE id = ?;"
-  
-  connection.query(LoginSql, id, (err, result) => {
+  const password = req.body.password;
+  const LoginSql = "SELECT * FROM USER WHERE id = ? AND pw = ?;"
+
+  console.log(id, req.body.password);
+
+  connection.query(LoginSql, [id, password], (err, result) => {
     if (err) {
       console.log(err);
     } else {
-      res.json({status: true, result});
+      if (result.length > 0) {
+        res.json({ status: true, result });
+      } else {
+        res.json({ status: false, message: "아이디 또는 비밀번호가 일치하지 않습니다." });
+      }
     }
   }
   );
 })
 
 app.post("/submit", (req, res) => { //메인화면 상태 저장
-  
-  const { username, date, weather, selected, temperature, explanation, wind, rain} = req.body;
 
-  const InsertUserSql =  "INSERT INTO report (name, date, state, fashion, temperature, Additional_explanation, wind, rain) VALUES (?,?,?,?,?,?,?,?);";
+  const { username, date, weather, selected, temperature, explanation, wind, rain } = req.body;
+
+  const InsertUserSql = "INSERT INTO report (name, date, state, fashion, temperature, Additional_explanation, wind, rain) VALUES (?,?,?,?,?,?,?,?);";
 
   const byWeather = [username, date, weather, selected, temperature, explanation, wind, rain];
 
   connection.query(InsertUserSql, byWeather, (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send({status: true});
-      }
+    if (err) {
+      console.log(err);
+    } else {
+      res.send({ status: true });
     }
+  }
   );
 })
 
@@ -87,7 +94,7 @@ app.get("/data/:name", (req, res) => { //메인화면 데이터 추출
   const sql = "SELECT * from report WHERE name = ?;"
 
   connection.query(sql, name, (err, result) => {
-    if(err) {
+    if (err) {
       console.log(err);
     } else {
       res.json(result)
@@ -103,9 +110,9 @@ app.delete("/deleteItem/:name/:temperature/:date", (req, res) => { //메인화�
   const sql = `DELETE FROM report WHERE name = "${name}" AND temperature = "${temperature}" AND date="${date}";`
 
   connection.query(sql, (err, result) => {
-    if(err){
+    if (err) {
       console.log(err)
-    } else{
+    } else {
       //console.log(`Deleted ${result.affectedRows} row(s)`);
       res.send('Data deleted');
     }
@@ -134,7 +141,7 @@ app.get("/manager", (req, res) => {
   const sql = "SELECT fashion, temperature from report;"
 
   connection.query(sql, (err, result) => {
-    if(err) {
+    if (err) {
       console.log(err);
     } else {
       res.json(result)

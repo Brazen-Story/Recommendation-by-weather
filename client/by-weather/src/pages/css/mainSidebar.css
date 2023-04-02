@@ -69,7 +69,7 @@ textarea:hover {
 }
 
 
-.submit_btn{
+.btn{
     background-color: #f6f8fa;
     border-color: rgba(27,31,36,0.15);
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -77,10 +77,10 @@ textarea:hover {
     margin-left: 179px; /* 필요에 따라 여백 조정 */
     border-radius: 10px;
     position: relative; /* 필수 */
-
+    margin-bottom: 1px;
 }
 
-.submit_btn img {
+.btn img {
     position: absolute;
     left: 15px;
     top: 50%;
@@ -90,14 +90,58 @@ textarea:hover {
     margin-right: 10px;
   }
 
-  .submit_btn span {
+  .btn span {
     margin-left: 18px;
     font-weight: bold;
     font-size: 12px;
  }
 
- .submit_btn:hover{
+ .btn:hover{
     background-color: #e6ebf1;
  }
 
  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Delicious+Handrawn&display=swap');
+
+ .image-button {
+    background-image: url(../image/menu.png);
+    width: 49px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: -1px 0px; /* x축 -10px, y축 -10px 이동 */
+    border: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 20px;
+    position: absolute;
+  }
+  
+  .image-button:hover{
+    background-color: #e6ebf1;
+  }
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 100%; */
+    position: 'relative'
+
+  }
+
+  .container button{
+    width: 200px;
+    height: 40px;
+    margin-left: 0%;
+  }
+
+  #menubtn1{
+    position: absolute;
+    top: 84%;
+}
+
+  #menubtn2{
+    position: absolute;
+    top: 89%;
+  }
+

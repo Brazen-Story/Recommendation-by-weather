@@ -7,7 +7,8 @@ import "moment/locale/ko";
 import moment from "moment";
 import option from "./clothes.json";
 import '../css/mainSidebar.css';
-import save from "../image/submit.png"
+import save from "../image/submit.png";
+import menu from "../image/menu.png";
 
 function MainSidebar(props) {
 
@@ -81,13 +82,18 @@ function MainSidebar(props) {
     getData();
   }, [name]);
 
-  // useEffect(() => {
-  //   const sessionStorageValue = userInfo.id;
-  //   setShowAdminButton(sessionStorageValue === 'manager');
-  // }, []);
+  useEffect(() => {
+    const sessionStorageValue = userInfo.id;
+    setShowAdminButton(sessionStorageValue === 'manager');
+  }, []);
 
   const Manager = () => {
     navigate('/manager');
+  }
+
+  const logout = () => {
+    sessionStorage.clear();
+    navigate('/login')
   }
 
   const [selectedTab, setSelectedTab] = useState(null);
@@ -96,11 +102,13 @@ function MainSidebar(props) {
     setSelectedTab(category === selectedTab ? null : category);
   };
 
+  const [showDiv, setShowDiv] = useState(false);
+
   return (
     <>
       <FormContainer>
         <div class="weather-info">
-          <h2 className="Htitle" style={{fontFamily: 'Dancing Script'}}>Fashion Diary</h2>
+          <h2 className="Htitle" style={{ fontFamily: 'Dancing Script' }}>Fashion Diary</h2>
           <p className="tab_title">품목</p>
           <div className="App">
             {Object.keys(option).map((category) => (
@@ -144,24 +152,35 @@ function MainSidebar(props) {
 
           {/* <button onClick={submit} className="submit_btn"> 저장 </button>           {" "} */}
 
-          <button className="submit_btn" onClick={submit}>
+          <button className="btn" onClick={submit}>
             <img src={save} alt="icon" /> <span> 저장 </span>  </button>
 
-          {showAdminButton && <button onClick={() => Manager()}>웹 관리</button>}
+          <div>
+          <div className="container">
+          {showAdminButton && showDiv && <button className="btn" id="menubtn1" onClick={() => Manager()}>웹 관리</button>}
+          {showDiv && <button className="btn" id="menubtn2" onClick={() => logout()}>로그아웃</button>}
+          </div>
+          <button className="image-button" onClick={() => setShowDiv(!showDiv)}></button>
+          </div>
 
         </div>
+
       </FormContainer>
     </>
 
   );
 }
 const FormContainer = styled.div`
-  margin-left: 300px;
+  margin-left: 350px;
   width: 260px;
   height: 100%;
   margin-top: 10px;
 
   position:fixed;
+
+  
+
+  
 `;
 
 export default MainSidebar;

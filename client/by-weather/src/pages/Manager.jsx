@@ -58,6 +58,8 @@ function Manager() {
     (a, b) => b[1].count - a[1].count
   );
 
+  
+
 
   //차트(그래프) 형식으로 데이터 수집한 것을 볼 수 있음.
   //온도에 따른 순위. 온도가 y축 옷들이 x축
@@ -94,6 +96,7 @@ function Manager() {
         ))}
       </tbody>
     </table>
+
       </FormContainer>
       <ToastContainer />
     </>
@@ -101,6 +104,7 @@ function Manager() {
 }
 
 const FormContainer = styled.div`
+
 
 `;
 
