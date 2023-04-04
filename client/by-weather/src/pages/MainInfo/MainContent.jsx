@@ -13,6 +13,7 @@ function MainContent(props) {
     const [selected, setSelected] = useState([]);
     const [mainData, setMainData] = useState([]);
     const [moveData, setMoveData] = useState([0, 0]);
+    const [findTemp, setFindTemp] = useState("");
 
     const navigate = useNavigate();
 
@@ -38,26 +39,47 @@ function MainContent(props) {
     const name = userInfo.name;
 
     useEffect(() => {
-        const getData = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3001/data/${name}`)
-                setMainData(response.data);
-            } catch (error) {
-                console.log("데이터 수집 오류");
-            }
-        };
+        // const getData = async () => {
+        //     try {
+        //         const response = await axios.get(`http://localhost:3001/data/${name}`)
+        //         setMainData(response.data);
+        //     } catch (error) {
+        //         console.log("데이터 수집 오류");
+        //     }
+        // };
         getData();
     }, [name]);
 
-    const dataMove = (a, b) => { //수정
-        setMoveData([a, b]);
+    const findData = async () => { //없는 데이터를 찾으려고 하는 경우 알려줘야함.
+        try {
+            const response = await axios.get(`http://localhost:3001/data/${name}/${findTemp}`)
+            setMainData(response.data);
+        } catch (error) {
+            console.log("데이터 수집 버튼 오류")
+        }
     }
+
+    const getData = async() => {
+        try {
+            const response = await axios.get(`http://localhost:3001/data/${name}`)
+            setMainData(response.data);
+        } catch (error) {
+            console.log("데이터 수집 오류");
+        }
+    };
+    
 
     useEffect(() => {
         if (moveData[0] !== 0) {
             navigate("/DataUpdatePage", { state: { dataArray: moveData } });
         }
     }, [moveData, navigate]);
+
+    const dataMove = (a, b) => { //수정
+        setMoveData([a, b]);
+    }
+
+
 
     return ( //순서
         <>
@@ -73,6 +95,11 @@ function MainContent(props) {
                             {props.main.wind}m/s
                         </p>
                         <img src={`http://openweathermap.org/img/wn/${props.main.icon}@2x.png`} alt="weather icon" className="icon"></img>
+                    </div>
+                    <div className="search">
+                        <input className="search_input" type="text" placeholder="온도" name="temp" onChange={(e) => setFindTemp(e.target.value)} />
+                        <button className="search_btn" onClick={() => findData()}></button>
+                        <button className="refresh_btn" onClick={() => getData()}></button>
                     </div>
                     {mainData.length > 0 && (
                         <ul>

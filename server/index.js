@@ -149,6 +149,21 @@ app.get("/manager", (req, res) => {
   })
 });
 
+app.get(`/data/:name/:findTemp`, (req, res) => {
+
+  const info = [req.params.name, req.params.findTemp];
+
+  const sql = "SELECT * from report WHERE name = ? AND temperature = ?;"
+
+  connection.query(sql, info, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(result)
+    }
+  })
+});
+
 
 //connection.end();
 

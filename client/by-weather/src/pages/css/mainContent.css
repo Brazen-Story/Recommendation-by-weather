@@ -1,3 +1,8 @@
+.All{
+  width: 660px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 li{
     background-color: white;
@@ -18,8 +23,7 @@ ul{
 
 .weatherData{
     text-align: center;
-    margin: 0%;
-    
+    margin: 0%; 
 }
 
 .icon{
@@ -94,4 +98,55 @@ p.weatherData {
 
   .double_btn{
     width: 20%;
+  }
+
+  .search {
+    position: relative; /* 검색창과 버튼을 포함하는 부모 요소에 relative position 설정 */
+    margin-top: 12px;
+    margin-left: 82%;
+  }
+  
+  .search_btn {
+    position: absolute; /* 버튼에 absolute position 설정 */
+    top: 53%; /* 버튼을 수직 중앙 정렬하기 위해 top 값을 50%로 설정 */
+    transform: translateY(-50%); /* 버튼을 수직 중앙 정렬하기 위해 translateY(-50%) 설정 */
+    right: 24px; /* 버튼을 오른쪽에 위치시키기 위해 right 값을 0으로 설정 */
+    width: 20px;
+    height: 20px;
+    background-image: url(../image/search.png);
+    background-size: cover;
+    border-color: #C9C9CA;
+    border-radius: 50%;
+    background-position: 1px 0px; /* x축 -10px, y축 -10px 이동 */
+  }
+  
+  .search_input {
+    border-radius: 10px;
+    background-color: #F4F4F5;
+    border-color: #C9C9CA;
+    width: 80px;
+    padding-right: 10px; /* 오른쪽 padding 값을 버튼의 width와 동일하게 설정 */
+    
+  }
+
+  .search_btn:hover{
+    background-color: #C9C9CA;
+  }
+
+  .refresh_btn {
+    position: absolute; /* 버튼에 absolute position 설정 */
+    top: 53%; /* 버튼을 수직 중앙 정렬하기 위해 top 값을 50%로 설정 */
+    transform: translateY(-50%); /* 버튼을 수직 중앙 정렬하기 위해 translateY(-50%) 설정 */
+    right: 0px; /* 버튼을 오른쪽에 위치시키기 위해 right 값을 0으로 설정 */
+    width: 20px;
+    height: 20px;
+    background-image: url(../image/refresh.png);
+    background-size: cover;
+    border-color: #C9C9CA;
+    border-radius: 50%;
+    background-position: 0px 0px; /* x축 -10px, y축 -10px 이동 */
+  }
+
+  .refresh_btn:hover{
+    background-color: #C9C9CA;
   }

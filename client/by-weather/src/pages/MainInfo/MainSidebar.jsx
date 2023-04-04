@@ -169,7 +169,7 @@ function MainSidebar(props) {
   );
 }
 const FormContainer = styled.div`
-  margin-left: 350px;
+  margin-left: -240px;
   width: 260px;
   height: 100%;
   margin-top: 10px;
