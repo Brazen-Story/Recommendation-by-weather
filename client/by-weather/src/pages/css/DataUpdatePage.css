@@ -1,0 +1,99 @@
+.update_title{
+    text-align: center;
+    margin: 0%; 
+    background-color: black;
+    color:white;
+    border-radius: 30px;
+    width:40%;
+    margin-left: 30%;
+    height: 40px;
+    margin-top:10px;
+}
+
+.update_weatherData{
+    display: inline-block;
+    vertical-align: middle;
+    margin-top:10px;
+    
+}
+
+.update_area {
+    width: 80%;
+        height: 110px;
+
+    align-items: center;
+    display: block;
+    margin: 0 auto;
+    padding: 5px;
+    position: relative;
+
+        background: transparent;
+    outline: none;
+    
+    color: #726659;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875em;
+    
+    border: solid 1px #b3aca7;
+    
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+  }
+
+  .update_area:hover {
+    background: #b3aca7;
+    color: #e2dedb;
+  }
+
+.update_options {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  
+  .update_label {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: calc(100% / 8 - 10px);
+    margin-right: 10px;
+    margin-bottom: 10px; /* 수정된 부분 */
+  }
+  
+  hr {
+    width: 80%;
+  }
+  
+  .update_span {
+    margin-left: 10%;
+    margin-top: 5%; /* 수정된 부분 */
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+  }
+
+.tab{
+    margin-bottom: 0.5%;
+}
+
+.update_btn {
+    background-color: #f6f8fa;
+    border-color: rgba(27,31,36,0.15);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 7px 50px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 3%;
+    right: 9.5%;
+  }
+
+.update_btn:hover{
+    background-color: #e6ebf1;
+ }
+
+#back_btn{
+    right: 17%;
+    padding: 7px 43px;
+}

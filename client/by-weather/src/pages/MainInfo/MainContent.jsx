@@ -39,14 +39,6 @@ function MainContent(props) {
     const name = userInfo.name;
 
     useEffect(() => {
-        // const getData = async () => {
-        //     try {
-        //         const response = await axios.get(`http://localhost:3001/data/${name}`)
-        //         setMainData(response.data);
-        //     } catch (error) {
-        //         console.log("데이터 수집 오류");
-        //     }
-        // };
         getData();
     }, [name]);
 
@@ -75,8 +67,8 @@ function MainContent(props) {
         }
     }, [moveData, navigate]);
 
-    const dataMove = (a, b) => { //수정
-        setMoveData([a, b]);
+    const dataMove = (a) => { //수정
+        setMoveData([a]);
     }
 
 
@@ -109,7 +101,7 @@ function MainContent(props) {
                                 날씨 : {item.state}<br />
                                 옷 : {item.fashion.replace(",", ", ")}<br />
                                 <div className="double_btn">
-                                    <button className="body_btn" onClick={() => dataMove(item.temperature, item.name)}>
+                                    <button className="body_btn" onClick={() => dataMove(item)}>
                                         <img src={edit} alt="icon" /> <span> 수정 </span>  </button>
 
                                     {" "}

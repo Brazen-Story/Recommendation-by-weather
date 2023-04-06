@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "moment/locale/ko";
 import moment from "moment";
-import option from "./clothes.json";
+import option from "../json/clothes.json";
 import '../css/mainSidebar.css';
 import save from "../image/submit.png";
 import menu from "../image/menu.png";
@@ -22,11 +22,6 @@ function MainSidebar(props) {
   const userInfo = JSON.parse(sessionStorage.getItem("username"));
   const nowTime = moment().format("YYYY-MM-DD"); //오늘 날짜 뽑기
 
-
-  const logOut = () => {
-    sessionStorage.removeItem("value");
-    navigate("/login");
-  };
 
   function handleCheckboxChange(event) {
     const checkboxValue = event.target.value;
@@ -145,6 +140,7 @@ function MainSidebar(props) {
             type="text"
             placeholder="부가설명"
             name="부가설명"
+            className="side_area"
             onChange={(e) => setExplanation(e.target.value)}
           />
 

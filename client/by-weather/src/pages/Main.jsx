@@ -36,16 +36,26 @@ function getWeather(lat, lon) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
-            setWeatherData({
-                place: data.name,
-                weather: data.weather[data.weather.length - 1].main,
-                temp: Math.round((data.main.temp - 273.15).toFixed(1)),
-                wind: data.wind.speed,
-                rain: data.rain['1h'],
-                feelsLike: Math.round((data.main.feels_like - 273.15).toFixed(1)),
-                icon: (data.weather[0].icon)
-            })
+            if (data.rain && data.rain['1h']) {
+                setWeatherData({
+                    place: data.name,
+                    weather: data.weather[data.weather.length - 1].main,
+                    temp: Math.round((data.main.temp - 273.15).toFixed(1)),
+                    wind: data.wind.speed,
+                    rain: data.rain['1h'],
+                    feelsLike: Math.round((data.main.feels_like - 273.15).toFixed(1)),
+                    icon: (data.weather[0].icon)
+                });
+            } else {
+                setWeatherData({
+                    place: data.name,
+                    weather: data.weather[data.weather.length - 1].main,
+                    temp: Math.round((data.main.temp - 273.15).toFixed(1)),
+                    wind: data.wind.speed,
+                    feelsLike: Math.round((data.main.feels_like - 273.15).toFixed(1)),
+                    icon: (data.weather[0].icon)
+                });
+            }
         })
 }
 

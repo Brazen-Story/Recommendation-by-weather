@@ -119,19 +119,25 @@ app.delete("/deleteItem/:name/:temperature/:date", (req, res) => { //메인화�
   })
 });
 
-app.put('/update/:name/:temperature', (req, res) => { //메인화면 데이터 수정
+app.put('/update/:name/:temperature/:wind', (req, res) => { //메인화면 데이터 수정
+
   const name = req.params.name;
   const temperature = req.params.temperature;
+  const wind = req.params.wind;
+
   const newData = req.body;
 
-  const query = `UPDATE report SET fashion = "${newData.selected}", Additional_explanation = "${newData.explanation}" WHERE name = "${name}" AND temperature = "${temperature}";`;
+  const fashionValue = newData.selected.join(',');
 
-  connection.query(query, (error, results) => {
+  const query =  `UPDATE report SET fashion = ?, Additional_explanation = ?
+   WHERE name = ? AND temperature = ? AND wind = ?;`;
+
+  connection.query(query, [fashionValue, newData.explanation, name, temperature, wind], (error, results) => {
     if (error) {
       console.error(error);
       res.status(500).send('Error updating data');
     } else {
-      res.status(200).send('Data updated successfully');
+      res.send({ status: true });
     }
   });
 });

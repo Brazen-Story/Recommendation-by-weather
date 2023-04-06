@@ -116,7 +116,7 @@ const handleSubmit = async(event) => {
 
 const FormContainer = styled.div`
   height: 100vh;
-  background-color: black;
+  background-color: #F4F4F5;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -124,6 +124,8 @@ const FormContainer = styled.div`
   gap: 1rem;
   align-items: center;
   .brand {
+    margin-right : 5%;
+    margin-left : 5%;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -132,12 +134,11 @@ const FormContainer = styled.div`
       height: 5rem;
     }
     h1 {
-      color: white;
       text-transform: uppercase;
     }
   }
   form {
-    border: solid 1px white;
+    border: solid 1px #C9C9CA;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -146,12 +147,12 @@ const FormContainer = styled.div`
   }
   input {
     padding: 1rem;
-    border: 0.1rem solid #4e0eff;
+    border: 0.1rem solid #C9C9CA;
     border-radius: 0.4rem;
-    width: 100%;
+    width: 88%;
     font-size: 1rem;
     &:focus {
-      border: 0.1rem solid #997af0;
+      border: 0.1rem solid #C9C9CA;
       outline: none;
     }
   }
@@ -164,16 +165,17 @@ const FormContainer = styled.div`
     font-size: 1rem;
     text-transform: uppercase;
     &:hover {
-      background-color: #4e0eff;
+      background-color: #a0a0a2;
     }
   }
   span {
-    color: white;
     text-transform: uppercase;
     a {
-      color: #4e0eff;
       text-decoration: none;
       font-weight: bold;
+    }
+    a:hover {
+      cursor: pointer;
     }
   }
 `;

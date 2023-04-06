@@ -5,82 +5,114 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "moment/locale/ko";
 import moment from "moment";
+import option from "./json/clothes.json";
+import "./css/DataUpdatePage.css"
+
 
 function DataUpdatePage() {
 
   const location = useLocation();
+  const navigate = useNavigate();
+
   const dataArray = location.state.dataArray;
-
-  const [selected, setSelected] = useState([]);
-  const [explanation,setExplanation] = useState();
-
   console.log(dataArray)
-    //DB 수정
-  const UpdateData = async (temperature, name) => {
+  const [selected, setSelected] = useState([]);
+  const [explanation, setExplanation] = useState();
+
+  console.log(dataArray[0].name)
+  console.log(dataArray[0].temperature)
+  console.log(dataArray[0].wind)
+
+  // console.log(option);
+
+  //DB 수정
+  const UpdateData = async (name, temperature, wind) => {
     try {
-      await axios.put(`http://localhost:3001/update/${name}/${temperature}`, { selected, explanation });
-      // Do something after successful update
+      const data = {
+        selected: selected,
+        explanation: explanation,
+      };
+      await axios.put(`http://localhost:3001/update/${name}/${temperature}/${wind}`, data);
+      navigate('/');
     } catch (error) {
-      console.log("hi")
       console.error(error);
       // Handle error
     }
   };
 
-      function handleCheckboxChange(event) {
-        const checkboxValue = event.target.value;
-        if (event.target.checked) {
-            setSelected([...selected, checkboxValue]);
-        } else {
-            setSelected(selected.filter(value => value !== checkboxValue));
-        }
+  function handleCheckboxChange(event) {
+    const checkboxValue = event.target.value;
+    if (event.target.checked) {
+      setSelected([...selected, checkboxValue]);
+    } else {
+      setSelected(selected.filter(value => value !== checkboxValue));
     }
+  }
 
+  console.log(selected)
+  console.log(explanation)
   return ( //순서
     <>
-      <FormContainer>
-        <div>
-          <textarea
-            type="text"
-            placeholder="부가설명"
-            name="부가설명"
-            onChange={(e) => setExplanation(e.target.value)}
-          />
-          <br />
-          <label>
-            <input
-              type="checkbox"
-              value="Option 1"
-              checked={selected.includes("Option 1")}
-              onChange={handleCheckboxChange}
-            />
-            Option 1
-          </label>
-          <br />
-          <label>
-            <input
-              type="checkbox"
-              value="Option 2"
-              checked={selected.includes("Option 2")}
-              onChange={handleCheckboxChange}
-            />
-            Option 2
-          </label>
-          <br />
-          <label>
-            <input
-              type="checkbox"
-              value="Option 3"
-              checked={selected.includes("Option 3")}
-              onChange={handleCheckboxChange}
-            />
-            Option 3
-          </label>
-          <br />
-          <button onClick={()=>UpdateData(dataArray[0], dataArray[1])}>수정</button>
+      <div>
+        <h2 className="Htitle" style={{ fontFamily: 'Dancing Script' }}>Fashion Diary</h2>
+        <div className="update_title">
+          {dataArray.map((item, index) => (
+            <div key={index}>
+              <p className="update_weatherData">
+                선택한 정보 : {" | "}
+                {item.name} {" | "}
+                {item.state}{" | "}
+                {item.temperature}°C{" | "}
+                {dataArray.rain === undefined ? null : "강수량 : " + dataArray.rain + " | "}
+                {item.wind}m/s{" | "}
+                {item.fashion}{" | "}
+                {item.date}
+              </p>
+            </div>
+          ))}
         </div>
+        <br />
+        {Object.keys(option).map((category) => (
+              <div className="tab" key={category}>
+                <span className="update_span">{category}</span>
+                <hr />
+                <div className="update_options">
+                  {option[category].map((option) => (
+                    <label key={option.value} className="update_label">
+                      <input
+                        type="checkbox"
+                        value={option.value}
+                        checked={selected.includes(option.value)}
+                        onChange={handleCheckboxChange}
+                      />
+                      {option.label}
+                    </label>
+                  ))}
+                </div>
+              </div>
+            ))}
+        <br />
+        <textarea
+          type="text"
+          placeholder="부가설명"
+          name="부가설명"
+          className="update_area"
+          onChange={(e) => setExplanation(e.target.value)}
+        />
+        <br />
+        <br />
+        <button onClick={() => UpdateData(dataArray[0].name, dataArray[0].temperature, dataArray[0].wind)} className="update_btn">
+          <span>
+            수정
+          </span>
+        </button>
+        <button className="update_btn" id="back_btn" onClick={() => navigate("/")}>
+          <span>
+            돌아가기
+          </span>
+        </button>
+      </div>
 
-      </FormContainer>
     </>
 
   );
@@ -92,7 +124,6 @@ top: 0px;
 bottom: 0px;
 left: 0px;
 right: 0px;
-margin-top: 55px;
 li {
     margin-top : 10px;
     padding: 10px;
