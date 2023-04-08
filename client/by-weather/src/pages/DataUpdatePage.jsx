@@ -32,7 +32,7 @@ function DataUpdatePage() {
         selected: selected,
         explanation: explanation,
       };
-      await axios.put(`http://localhost:3001/update/${name}/${temperature}/${wind}`, data);
+      await axios.put(`http://localhost:3001/report/update/${name}/${temperature}/${wind}`, data);
       navigate('/');
     } catch (error) {
       console.error(error);
@@ -117,6 +117,7 @@ function DataUpdatePage() {
 
   );
 }
+
 const FormContainer = styled.div`
 overflow: hidden;
 min-width: auto;

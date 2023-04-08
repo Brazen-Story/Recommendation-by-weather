@@ -33,7 +33,7 @@ function Login() {
 
     const { password, id, phoneNumber } = values;
 
-    const { data } = await axios.post("http://localhost:3001/login", {
+    const { data } = await axios.post("http://localhost:3001/user/login", {
       id,
       password,
       phoneNumber,
@@ -49,7 +49,6 @@ function Login() {
       sessionStorage.setItem("username", JSON.stringify(userInfo));
       navigate("/");
     }
-
   }
 
   const goResi = () => {

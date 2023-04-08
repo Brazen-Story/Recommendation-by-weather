@@ -40,7 +40,7 @@ const handleSubmit = async(event) => {
     phoneNumber: phoneNumber,
   })
 
-  axios.post("http://localhost:3001/create", {
+  axios.post("http://localhost:3001/user/create", {
     username: username,
     id: id,
     password: password,

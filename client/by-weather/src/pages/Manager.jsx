@@ -11,7 +11,7 @@ function Manager() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/manager`)
+        const response = await axios.get(`http://localhost:3001/report/manager`)
         setData(response.data);
       } catch (error) {
         console.log(error);

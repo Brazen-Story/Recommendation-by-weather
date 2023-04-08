@@ -51,7 +51,7 @@ function MainSidebar(props) {
 
   const submit = async () => {
 
-    const { data } = await axios.post("http://localhost:3001/submit", byWeather)
+    const { data } = await axios.post("http://localhost:3001/report/submit", byWeather)
 
     if (data.status === false) {
       alert("기입하신 정보를 다시 확인해주세요.");
@@ -64,7 +64,7 @@ function MainSidebar(props) {
 
   const getData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/data/${name}`)
+      const response = await axios.get(`http://localhost:3001/report/data/${name}`)
       setMainData(response.data);
       //console.log(response)
 

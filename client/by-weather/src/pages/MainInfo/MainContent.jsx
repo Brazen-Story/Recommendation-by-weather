@@ -21,8 +21,8 @@ function MainContent(props) {
 
     const deleteItem = async (temperature, name, date) => {
 
-        await axios.delete(`http://localhost:3001/deleteItem/${name}/${temperature}/${date}`);
-        const response = await axios.get(`http://localhost:3001/data/${name}`);
+        await axios.delete(`http://localhost:3001/report/deleteItem/${name}/${temperature}/${date}`);
+        const response = await axios.get(`http://localhost:3001/report/data/${name}`);
         setMainData(response.data);
 
     }
@@ -44,7 +44,7 @@ function MainContent(props) {
 
     const findData = async () => { //없는 데이터를 찾으려고 하는 경우 알려줘야함.
         try {
-            const response = await axios.get(`http://localhost:3001/data/${name}/${findTemp}`)
+            const response = await axios.get(`http://localhost:3001/report/data/${name}/${findTemp}`)
             setMainData(response.data);
         } catch (error) {
             console.log("데이터 수집 버튼 오류")
@@ -53,7 +53,7 @@ function MainContent(props) {
 
     const getData = async() => {
         try {
-            const response = await axios.get(`http://localhost:3001/data/${name}`)
+            const response = await axios.get(`http://localhost:3001/report/data/${name}`)
             setMainData(response.data);
         } catch (error) {
             console.log("데이터 수집 오류");

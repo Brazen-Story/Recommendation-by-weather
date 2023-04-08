@@ -2,9 +2,8 @@ const express = require('express');
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
-const axios = require("axios");
-const cheerio = require("cheerio");
-//const { response } = require('express');
+const userRoutes = require('./routes/userRoutes');
+const ReportRoutes = require('./routes/reportRoutes');
 
 app.use(cors());
 app.use(express.json());
@@ -28,147 +27,8 @@ connection.query(user + report, function (error, results, fields) {
   //console.log('The solution is: ', results);
 });
 
-app.post("/create", (req, res) => { //회원가입 로그인페이지
-  const id = req.body.id;
-  const phoneNumber = req.body.phoneNumber;
-  const username = req.body.username;
-  const password = req.body.password;
-
-  const InsertUserSql = "INSERT INTO user (id, pw, name, phone_number) VALUES (?,?,?,?);";
-  const CreateUser = [id, password, username, phoneNumber];
-
-  connection.query(InsertUserSql, CreateUser, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send("Values Inserted");
-    }
-  }
-  );
-});
-
-app.post("/login", (req, res) => { //로그인 로그인페이지
-
-  const id = req.body.id;
-  const password = req.body.password;
-  const LoginSql = "SELECT * FROM USER WHERE id = ? AND pw = ?;"
-
-  console.log(id, req.body.password);
-
-  connection.query(LoginSql, [id, password], (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      if (result.length > 0) {
-        res.json({ status: true, result });
-      } else {
-        res.json({ status: false, message: "아이디 또는 비밀번호가 일치하지 않습니다." });
-      }
-    }
-  }
-  );
-})
-
-app.post("/submit", (req, res) => { //메인화면 상태 저장
-
-  const { username, date, weather, selected, temperature, explanation, wind, rain } = req.body;
-
-  const InsertUserSql = "INSERT INTO report (name, date, state, fashion, temperature, Additional_explanation, wind, rain) VALUES (?,?,?,?,?,?,?,?);";
-
-  const byWeather = [username, date, weather, selected, temperature, explanation, wind, rain];
-
-  connection.query(InsertUserSql, byWeather, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send({ status: true });
-    }
-  }
-  );
-})
-
-app.get("/data/:name", (req, res) => { //메인화면 데이터 추출
-
-  const name = req.params.name;
-
-  const sql = "SELECT * from report WHERE name = ?;"
-
-  connection.query(sql, name, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(result)
-    }
-  })
-});
-
-app.delete("/deleteItem/:name/:temperature/:date", (req, res) => { //메인화면 데이터 삭제
-
-  const name = req.params.name;
-  const temperature = req.params.temperature;
-  const date = req.params.date;
-  const sql = `DELETE FROM report WHERE name = "${name}" AND temperature = "${temperature}" AND date="${date}";`
-
-  connection.query(sql, (err, result) => {
-    if (err) {
-      console.log(err)
-    } else {
-      //console.log(`Deleted ${result.affectedRows} row(s)`);
-      res.send('Data deleted');
-    }
-  })
-});
-
-app.put('/update/:name/:temperature/:wind', (req, res) => { //메인화면 데이터 수정
-
-  const name = req.params.name;
-  const temperature = req.params.temperature;
-  const wind = req.params.wind;
-
-  const newData = req.body;
-
-  const fashionValue = newData.selected.join(',');
-
-  const query =  `UPDATE report SET fashion = ?, Additional_explanation = ?
-   WHERE name = ? AND temperature = ? AND wind = ?;`;
-
-  connection.query(query, [fashionValue, newData.explanation, name, temperature, wind], (error, results) => {
-    if (error) {
-      console.error(error);
-      res.status(500).send('Error updating data');
-    } else {
-      res.send({ status: true });
-    }
-  });
-});
-
-app.get("/manager", (req, res) => {
-
-  const sql = "SELECT fashion, temperature from report;"
-
-  connection.query(sql, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(result)
-    }
-  })
-});
-
-app.get(`/data/:name/:findTemp`, (req, res) => {
-
-  const info = [req.params.name, req.params.findTemp];
-
-  const sql = "SELECT * from report WHERE name = ? AND temperature = ?;"
-
-  connection.query(sql, info, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(result)
-    }
-  })
-});
+app.use('/user', userRoutes);
+app.use('/report', ReportRoutes);
 
 
 //connection.end();
