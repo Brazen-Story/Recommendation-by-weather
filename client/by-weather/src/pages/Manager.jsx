@@ -3,109 +3,54 @@ import styled from "styled-components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import "./css/manager.css";
+import ManagerChart from "./managerInfo/managerChart"
+import ManagerTable from "./managerInfo/managerTable"
+
 
 function Manager() {
 
   const [data, setData] = useState([]);
+  const [findTemp, setFindTemp] = useState(''); // 검색어
+
+  const getData = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3001/report/manager`);
+      setData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3001/report/manager`)
-        setData(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getData();
   }, []);
 
-  const groupedData = data.reduce((groups, item) => {
-    const temp = item.temperature;
-    if (!groups[temp]) {
-      groups[temp] = [];
-    }
-    groups[temp].push(item);
-    return groups;
-  }, {});
+  const findData = () => {
+    const filteredData = data.filter(item => item.temperature === parseInt(findTemp));
+    setData(filteredData);
+  };
 
-   const result = Object.keys(groupedData).reduce((acc, key) => {
-    const arr = groupedData[key].flatMap(obj => {
-      if (typeof obj.fashion === 'string' && obj.fashion.includes(',')) {
-        return obj.fashion.split(',');
-      } else {
-        return [obj.fashion];
-      }
-    });
-    const counts = arr.reduce((count, value) => {
-      count[value] = (count[value] || 0) + 1;
-      return count;
-    }, {});
-    const maxCount = Math.max(...Object.values(counts));  //갯수
-    const mostCommon = Object.keys(counts).find(key => counts[key] === maxCount); //이름
-    const newObj = {
-      [key]: {
-        mostCommon: mostCommon,
-        count: maxCount
-      },
-    };
-    return { ...acc, ...newObj };
-  }, {});
-
-  console.log(result)
-
-  const sortedEntries = Object.entries(result).sort(
-    (a, b) => b[1].count - a[1].count
-  );
-
-  
-
-
-  //차트(그래프) 형식으로 데이터 수집한 것을 볼 수 있음.
-  //온도에 따른 순위. 온도가 y축 옷들이 x축
-  //만약 우선순위가 같다면?
-  //테이블?..
-  //온도에 따른 통계라서 많은 데이터가 필요한데 없음.
-  //옷의 카테고리를 나눠야하나?
-  //전체적인 모든 재고의 순위.
-  //Recharts
-  //https://citylock77.tistory.com/133
-  //광고 api
-
-  //배너 노출시간 어떻게 표현 할지. 우선순위에 관하여 정해짐.
-  //표
+  //새로고침은 안보이게
+  //만약 input에 값이 있으면 차트가 보이게 input에 값이 없으면 안보이게
+  //
 
   return (
     <>
-      <FormContainer>
-      <table>
-      <thead>
-        <tr>
-          <th>기온</th>
-          <th>옷</th>
-          <th>개수</th>
-        </tr>
-      </thead>
-      <tbody>
-        {sortedEntries.map(([key, value]) => (
-          <tr key={key}>
-            <td>{key}°</td>
-            <td>{value.mostCommon}</td>
-            <td>{value.count}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-
-      </FormContainer>
-      <ToastContainer />
+      <div>
+        <h2 className="Htitle" style={{ fontFamily: 'Dancing Script' }}>Fashion Diary</h2>
+        <div className="manager_search">
+          <input className="manager_search_input" type="text" placeholder="온도" name="temp" onChange={(e) => setFindTemp(e.target.value)} />
+          <button className="manager_search_btn" onClick={() => findData()}></button>
+          <button className="manager_refresh_btn" onClick={() => getData()}></button>
+        </div>
+            <ManagerTable manager={data} />
+            <ManagerChart manager={data} />
+      </div>
     </>
   );
 }
 
-const FormContainer = styled.div`
-
-
-`;
 
 export default Manager;

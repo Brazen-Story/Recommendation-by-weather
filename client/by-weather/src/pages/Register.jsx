@@ -8,14 +8,6 @@ import axios from "axios";
 function Register() {
   const navigate = useNavigate();
 
-//   var today = new Date();
-
-//   var year = today.getFullYear();
-//   var month = ('0' + (today.getMonth() + 1)).slice(-2);
-//   var day = ('0' + today.getDate()).slice(-2);
-
-//   var dateString = year + '-' + month  + '-' + day;
-
   const toastOptions = {
     position: "bottom-right",
     autoClose: 8000,
@@ -47,30 +39,6 @@ const handleSubmit = async(event) => {
     phoneNumber: phoneNumber,
   }).then(navigate("/login"))
 }
-
-  // const handleValidation = () => {
-  //   const { password, confirmPassword, username, email } = values;
-  //   if (password !== confirmPassword) {
-  //     toast.error(
-  //       "password and confirm password should be same.",
-  //       toastOptions
-  //     );
-  //     return false;
-  //   } else if (username.length < 3) {
-  //     toast.error("Username should be greater than 3 charcters", toastOptions);
-  //     return false;
-  //   } else if (password.length < 8) {
-  //     toast.error(
-  //       "password shouldbe equal or greater than 8 charters",
-  //       toastOptions
-  //     );
-  //     return false;
-  //   } else if (email === "") {
-  //     toast.error("email is required", toastOptions);
-  //     return false;
-  //   }
-  //   return true;
-  // };
 
   return (
     <>

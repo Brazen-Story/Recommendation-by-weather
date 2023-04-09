@@ -50,16 +50,24 @@ function MainSidebar(props) {
   }
 
   const submit = async () => {
-
-    const { data } = await axios.post("http://localhost:3001/report/submit", byWeather)
-
-    if (data.status === false) {
-      alert("기입하신 정보를 다시 확인해주세요.");
-    }
-
-    if (data.status === true) {
-      window.location.reload();
-    }
+    axios.post('http://localhost:3001/report/submit', byWeather)
+      .then(response => {
+        if (response.status === 200) {
+          return response.data;
+        } else if (response.status === 409) {
+          return Promise.reject(new Error(response.data));
+        } else {
+          return Promise.reject(new Error('서버 오류가 발생했습니다.'));
+        }
+      })
+      .then(data => {
+        // 데이터 처리 로직
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error(error);
+        window.alert("이미 작성된 기록이 있습니다.");
+      });
   }
 
   const getData = async () => {
@@ -133,9 +141,7 @@ function MainSidebar(props) {
               </div>
             ))}
           </div>
-
           <br />
-
           <textarea
             type="text"
             placeholder="부가설명"
@@ -143,22 +149,17 @@ function MainSidebar(props) {
             className="side_area"
             onChange={(e) => setExplanation(e.target.value)}
           />
-
           <br />
-
           <button className="btn" id="save_btn" onClick={submit}>
             <img src={save} alt="icon" /> <span> 저장 </span>  </button>
-
           <div>
-          <div className="container">
-          {showAdminButton && showDiv && <button className="btn" id="menubtn1" onClick={() => Manager()}>웹 관리</button>}
-          {showDiv && <button className="btn" id="menubtn2" onClick={() => logout()}>로그아웃</button>}
+            <div className="container">
+              {showAdminButton && showDiv && <button className="btn" id="menubtn1" onClick={() => Manager()}>웹 관리</button>}
+              {showDiv && <button className="btn" id="menubtn2" onClick={() => logout()}>로그아웃</button>}
+            </div>
+            <button className="image-button" onClick={() => setShowDiv(!showDiv)}></button>
           </div>
-          <button className="image-button" onClick={() => setShowDiv(!showDiv)}></button>
-          </div>
-
         </div>
-
       </FormContainer>
     </>
 

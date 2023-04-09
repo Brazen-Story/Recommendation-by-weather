@@ -45,6 +45,7 @@ exports.loginUser = async (req, res) => {
           const user = result[0];
           const match = await bcrypt.compare(password, user.pw);
           if (match) {
+            console.log("hi")
             res.json({ status: true, result });
           } else {
             res.json({ status: false, message: "아이디 또는 비밀번호가 일치하지 않습니다." });
@@ -55,21 +56,3 @@ exports.loginUser = async (req, res) => {
       }
     });
   };
-//   exports.loginUser = async(req, res) => {
-//     const id = req.body.id;
-//     const password = req.body.password;
-//     const LoginSql = "SELECT * FROM USER WHERE id = ? AND pw = ?;"
-  
-//     connection.query(LoginSql, [id, password], (err, result) => {
-//       if (err) {
-//         console.log(err);
-//       } else {
-//         if (result.length > 0) {
-//           res.json({ status: true, result });
-//         } else {
-//           res.json({ status: false, message: "아이디 또는 비밀번호가 일치하지 않습니다." });
-//         }
-//       }
-//     }
-//     );
-//   }

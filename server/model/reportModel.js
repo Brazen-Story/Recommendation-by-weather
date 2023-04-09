@@ -25,7 +25,7 @@ const Report = sequelize.define('Report', {
     type: DataTypes.STRING(45),
   },
   temperature: {
-    type: DataTypes.STRING(45),
+    type: DataTypes.INTEGER,
     primaryKey: true,
     allowNull: false
   },

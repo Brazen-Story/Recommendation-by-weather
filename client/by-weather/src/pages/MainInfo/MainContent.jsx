@@ -108,7 +108,6 @@ function MainContent(props) {
                                     <button className="body_btn" onClick={() => deleteItem(item.temperature, item.name, item.date)}>
                                         <img src={del} alt="icon" /> <span> 삭제 </span> </button>
                                 </div>
-
                             </li>
                             ))}
                         </ul>

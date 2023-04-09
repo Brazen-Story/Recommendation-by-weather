@@ -1,0 +1,73 @@
+table {
+    border-collapse: separate;
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+  }
+
+  .tr_head{
+    margin-top: 5%;
+    background-color: #8e847a;
+  }
+
+.td_temp{
+    text-align: left;
+    border: none;
+    padding: 3%;
+    padding-left: 0%;
+}  
+
+  .td_temp_h2{
+    margin: inherit;
+}
+
+.manager_search {
+    display: flex;
+    justify-content: center;
+    margin-top: 1%;
+  }
+
+  .manager_search_input {
+    border-radius: 10px;
+    background-color: #F4F4F5;
+    border-color: #C9C9CA;
+    width: 12%;
+    padding-right: 10px; /* 오른쪽 padding 값을 버튼의 width와 동일하게 설정 */
+    
+  }
+
+  .manager_search_btn {
+    top: 53%; /* 버튼을 수직 중앙 정렬하기 위해 top 값을 50%로 설정 */
+    right: 24px; /* 버튼을 오른쪽에 위치시키기 위해 right 값을 0으로 설정 */
+    width: 20px;
+    height: 20px;
+    background-image: url(../image/search.png);
+    background-size: cover;
+    border-color: #C9C9CA;
+    border-radius: 50%;
+    background-position: 1px 0px; /* x축 -10px, y축 -10px 이동 */
+  }
+  .manager_search_btn:hover{
+    background-color: #C9C9CA;
+  }
+
+  .manager_refresh_btn {
+    top: 53%; /* 버튼을 수직 중앙 정렬하기 위해 top 값을 50%로 설정 */
+    right: 0px; /* 버튼을 오른쪽에 위치시키기 위해 right 값을 0으로 설정 */
+    width: 20px;
+    height: 20px;
+    background-image: url(../image/refresh.png);
+    background-size: cover;
+    border-color: #C9C9CA;
+    border-radius: 50%;
+    background-position: 0px 0px; /* x축 -10px, y축 -10px 이동 */
+  }
+
+  .manager_refresh_btn:hover{
+    background-color: #C9C9CA;
+  }
+

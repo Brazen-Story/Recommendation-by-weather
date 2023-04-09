@@ -7,6 +7,6 @@ router.get('/data/:name', reportController.getReportsByName);
 router.delete('/deleteItem/:name/:temperature/:date', reportController.deleteReport);
 router.put('/update/:name/:temperature/:wind', reportController.updateReport);
 router.get('/manager',reportController.managerPage);
-router.get('/data:name/:findTemp',reportController.findtemp)
+router.get('/data/:name/:findTemp',reportController.findtemp)
 
 module.exports = router;
