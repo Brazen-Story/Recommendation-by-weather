@@ -13,7 +13,7 @@ function managerChart(props) {
         <>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {props.manager.map((item) => (
-              <div className="Chart" key={item.temperature} style={{ height: '300px', marginBottom: '30px' , width: '800px'}}>
+              <div className="Chart" key={item.temperature} style={{ height: '300px', marginBottom: '30px' , width: '900px'}}>
                 <ResponsiveContainer minHeight={300}>
                   <LineChart
                     data={item.fashion_list}

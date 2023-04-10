@@ -1,9 +1,11 @@
-table {
+.managerTable {
     border-collapse: separate;
     text-align: center;
     margin: 0 auto;
+    margin-top: 20px;
+
   }
-  
+
   th, td {
     border: 1px solid black;
     padding: 8px;
@@ -71,3 +73,27 @@ table {
     background-color: #C9C9CA;
   }
 
+  .manager-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .manager-table {
+    transform: translateX(0%);
+    transition: transform 0.5s;
+  }
+  
+  .manager-chart {
+    transform: translateX(100%);
+    transition: transform 0.5s;
+  }
+  
+  .manager-wrapper.show-chart .manager-table {
+    transform: translateX(70%);
+  }
+  
+  .manager-wrapper.show-chart .manager-chart {
+    transform: translateX(30%);
+  }

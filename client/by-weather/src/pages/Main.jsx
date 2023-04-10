@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import "moment/locale/ko";
-import MainSidebar from "./MainInfo/MainSidebar";
+import MainLeftSidebar from "./MainInfo/MainLeftSidebar";
 import MainContent from "./MainInfo/MainContent";
+import MainRightSidebar from "./MainInfo/mainRightSidebar";
 import "./css/main.css"
+
 
 function Main(props) {
 
@@ -64,11 +66,13 @@ useEffect(() => {
 }, []);
 
 
+
   return (
     <> 
     <div className="All" style={{backgroudColor:"#F4F4F5",display: "flex"}}>
-    <MainSidebar main={weatherData}/>
+    <MainLeftSidebar main={weatherData}/>
     <MainContent main={weatherData}/>
+    <MainRightSidebar main={weatherData}/>
     </div>
     </>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "moment/locale/ko";
@@ -8,9 +8,8 @@ import moment from "moment";
 import option from "../json/clothes.json";
 import '../css/mainSidebar.css';
 import save from "../image/submit.png";
-import menu from "../image/menu.png";
 
-function MainSidebar(props) {
+function MainLeftSidebar(props) {
 
   const [explanation, setExplanation] = useState();
   const [selected, setSelected] = useState([]);
@@ -31,7 +30,7 @@ function MainSidebar(props) {
       setSelected(selected.filter(value => value !== checkboxValue));
     }
   }
-
+  
   const clothes = selected.join(',');
 
   const name = userInfo.name;
@@ -178,4 +177,4 @@ const FormContainer = styled.div`
   
 `;
 
-export default MainSidebar;
+export default MainLeftSidebar;
