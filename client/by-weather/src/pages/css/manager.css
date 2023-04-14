@@ -53,6 +53,7 @@
     border-radius: 50%;
     background-position: 1px 0px; /* x축 -10px, y축 -10px 이동 */
   }
+
   .manager_search_btn:hover{
     background-color: #C9C9CA;
   }
@@ -91,9 +92,44 @@
   }
   
   .manager-wrapper.show-chart .manager-table {
-    transform: translateX(70%);
+    transform: translateX(-30%);
   }
   
   .manager-wrapper.show-chart .manager-chart {
-    transform: translateX(30%);
+    transform: translateX(0%);
   }
+
+.manager_btn{
+  margin-top: 3%;
+  background-color: #f6f8fa;
+  border-color: rgba(27,31,36,0.15);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  padding: 7px 16px;
+  border-radius: 10px;
+
+}
+
+.manager_btn:hover{
+  background-color: #e6ebf1;
+}
+
+.Manager{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.Manager .button-container {
+  display: flex;
+}
+
+.Manager .button-container button:first-child {
+  margin-right: 20px;
+}
+
+.manager_search_input{
+  width: 50%;
+}
+

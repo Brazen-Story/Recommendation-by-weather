@@ -7,10 +7,12 @@ import DataUpdatePage from "./pages/DataUpdatePage";
 import Manager from "./pages/Manager";
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/manager" element={<Manager />} />
+        <Route path="/manager" element={<Manager />} />
+        <Route path="/manager/:list" element={<Manager />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/" element={<Main />} />

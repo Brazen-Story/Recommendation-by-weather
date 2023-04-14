@@ -56,3 +56,21 @@ exports.loginUser = async (req, res) => {
       }
     });
   };
+
+  exports.ManagerUserList = async (req, res) => {
+
+    const sql = `SELECT u.id, u.name, DATE_FORMAT(u.join_date, '%Y-%m-%d') as join_date, IFNULL(COUNT(r.name), 0) as count 
+    FROM user u LEFT JOIN report r ON u.name = r.name
+    GROUP BY u.id, u.name, join_date
+    ORDER BY count DESC;`
+  
+     connection.query(sql, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result)
+        res.json(result)
+      }
+    })
+  };
+  

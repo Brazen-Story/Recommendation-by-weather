@@ -12,23 +12,23 @@ function Main(props) {
   const [coords, saveCoords] = useState();
   const [weatherData, setWeatherData] = useState({});
 
-  function handleGeoSucc(position) { // 위치 잡기
-    //console.log("postion : " + position);
+  function handleGeoSucc(position) {  // geolocation API를 이용하여 현재 위치를 가져오는데 성공했을 때 호출되는 함수입니다.
     const latitude = position.coords.latitude;  // 경도  
     const longitude = position.coords.longitude;  // 위도
     const coordsObj = {
-        latitude,
+        latitude, 
         longitude
     }
-    saveCoords(coordsObj);
-    getWeather(latitude, longitude);
+    saveCoords(coordsObj); // 현재 위치의 좌표 데이터를 업데이트합니다.
+    getWeather(latitude, longitude); // 현재 위치의 날씨 데이터를 가져옵니다
 }
 
-function handleGeoErr(err) {
-    console.log("geo err! " + err);
+function handleGeoErr(err) {  // geolocation API를 이용하여 현재 위치를 가져오는데 실패했을 때 호출되는 함수입니다.
+    console.log("geo err! " + err); // 에러 메시지를 콘솔에 출력합니다.
 }
 
-function requestCoords() {
+function requestCoords() { // geolocation API를 이용하여 현재 위치를 가져오는 함수입니다.
+    // geolocation API를 호출하고, 성공시 handleGeoSucc 함수를, 실패시 handleGeoErr 함수를 호출합니다.
     navigator.geolocation.getCurrentPosition(handleGeoSucc, handleGeoErr);
 }
 

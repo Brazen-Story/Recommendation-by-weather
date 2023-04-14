@@ -16,14 +16,13 @@ function DataUpdatePage() {
 
   const dataArray = location.state.dataArray;
   console.log(dataArray)
+
   const [selected, setSelected] = useState([]);
   const [explanation, setExplanation] = useState();
 
   console.log(dataArray[0].name)
   console.log(dataArray[0].temperature)
   console.log(dataArray[0].wind)
-
-  // console.log(option);
 
   //DB 수정
   const UpdateData = async (name, temperature, wind) => {

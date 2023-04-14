@@ -1,0 +1,11 @@
+.user_table{
+    margin-top: 1%;
+}
+
+.manager_userlist_search{
+    border-radius: 10px;
+    background-color: #F4F4F5;
+    border-color: #C9C9CA;
+    width: 50%;
+    padding-right: 10px; /* 오른쪽 padding 값을 버튼의 width와 동일하게 설정 */
+}

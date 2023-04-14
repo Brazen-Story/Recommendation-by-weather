@@ -30,7 +30,6 @@ connection.query(user + report, function (error, results, fields) {
 app.use('/user', userRoutes);
 app.use('/report', ReportRoutes);
 
-
 //connection.end();
 
 app.listen(3001, () => {
