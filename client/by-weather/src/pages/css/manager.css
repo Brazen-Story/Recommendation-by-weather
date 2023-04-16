@@ -133,3 +133,17 @@
   width: 50%;
 }
 
+.home_btn{
+      background-image: url(../image/home.png);
+      width: 49px;
+      height: 40px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: -1px 0px; /* x축 -10px, y축 -10px 이동 */
+      border: none;
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+      margin-bottom: 20px;
+      position: absolute;
+}

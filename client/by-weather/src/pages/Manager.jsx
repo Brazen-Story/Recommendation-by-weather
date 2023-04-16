@@ -21,6 +21,10 @@ function Manager() {
     navigate(`/manager/${list}`);
   };
 
+  const home = () => {
+    navigate('/')
+  }
+
   return (
     <>
       <div className="Manager">
@@ -32,6 +36,8 @@ function Manager() {
         {list === "datalist" && <Datalist />}
         {list === "userlist" && <Userlist />}
       </div>
+
+      <button className="home_btn" onClick={()=>home()}></button>
     </>
   );
 }
