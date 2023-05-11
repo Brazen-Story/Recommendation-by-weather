@@ -106,7 +106,6 @@ exports.managerPage = async (req, res) => {
           fashion_list: sortedFashionCounts.map(([fashion, count]) => ({ fashion, count })),
         };
       });
-      
       res.json(output);
     }
   });

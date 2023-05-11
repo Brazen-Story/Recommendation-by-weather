@@ -2,6 +2,12 @@ const express = require('express');
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
+const dotenv = require('dotenv');
+const cookieParser = require("cookie-parser");
+
+dotenv.config();
+
+app.use(cookieParser());
 
 const connection = mysql.createConnection({
     host: 'localhost',

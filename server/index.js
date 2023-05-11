@@ -2,11 +2,22 @@ const express = require('express');
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const userRoutes = require('./routes/userRoutes');
 const ReportRoutes = require('./routes/reportRoutes');
+const dotenv = require('dotenv');
 
-app.use(cors());
+dotenv.config();
+
 app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    credentials: true,
+  })
+);
 
 
 const connection = mysql.createConnection({
@@ -32,6 +43,6 @@ app.use('/report', ReportRoutes);
 
 //connection.end();
 
-app.listen(3001, () => {
+app.listen(process.env.PORT, () => {
   console.log("your server is running on port 3001");
 });

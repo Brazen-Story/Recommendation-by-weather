@@ -3,13 +3,15 @@ const db = require('../db/config');
 const connection = db.connection;
 const bcrypt = require('bcrypt');
 const saltRounds = 10; // salt의 자릿수
+const jwt = require("jsonwebtoken");
 
+let refreshTokenInterval;
 
 exports.createUser = async (req, res) => { //회원가입 로그인페이지
-    const id = req.body.id;
-    const phoneNumber = req.body.phoneNumber;
-    const username = req.body.username;
-    const password = req.body.password;
+  const id = req.body.id;
+  const phoneNumber = req.body.phoneNumber;
+  const username = req.body.username;
+  const password = req.body.password;
 
   // bcrypt.hash 함수를 사용해서 비밀번호를 해싱합니다.
   bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
@@ -30,47 +32,146 @@ exports.createUser = async (req, res) => { //회원가입 로그인페이지
   });
 }
 
+exports.loginUser = async (req, res) => { //토큰이 지급이 안됌
+  const id = req.body.id;
+  const password = req.body.password;
+  const LoginSql = "SELECT * FROM USER WHERE id = ?;";
 
-exports.loginUser = async (req, res) => {
-    const id = req.body.id;
-    const password = req.body.password;
-    const LoginSql = "SELECT * FROM USER WHERE id = ?;";
-  
-    connection.query(LoginSql, [id], async (err, result) => {
+  connection.query(LoginSql, [id], async (err, result) => {
+    if (err) {
+      console.log(err);
+      res.json({ status: false, message: "로그인에 실패했습니다." });
+    } else {
+      if (result.length > 0) {
+        const user = result[0];
+        const match = await bcrypt.compare(password, user.pw);
+        if (!match) {
+          res.status(403).json("Not Authorized");
+        } else {
+          try {
+            // access Token 발급
+            const accessToken = jwt.sign({
+              id: user.id,
+              username: user.name,
+              phoneNumber: user.phone_number,
+            }, process.env.ACCESS_SECRET, {
+              expiresIn: '1m',
+              issuer: 'About Tech',
+            });
+
+            // refresh Token 발급
+            const refreshToken = jwt.sign({
+              id: user.id,
+              username: user.name,
+              phoneNumber: user.phone_number,
+            }, process.env.REFRECH_SECRET, {
+              expiresIn: '24h',
+              issuer: 'About Tech',
+            })
+
+            // token 전송
+            res.cookie("accessToken", accessToken, {
+              secure: false,
+              httpOnly: true,
+            })
+
+            res.cookie("refreshToken", refreshToken, {
+              secure: false,
+              httpOnly: true,
+            })
+            console.log(accessToken);
+            res.json({ status: true, result });
+
+          } catch (error) {
+            res.status(500).json(error);
+          }
+        }
+      };
+    }
+  });
+};
+
+exports.loginSuccess = (req, res) => {
+
+  const token = req.cookies.accessToken;
+  const data = jwt.verify(token, process.env.ACCESS_SECRET);
+
+  const query = "select id, name from USER where id = ?";
+
+  connection.query(query, [data.id], (err, results) => { // change error to err
+    try {
       if (err) {
         console.log(err);
-        res.json({ status: false, message: "로그인에 실패했습니다." });
       } else {
-        if (result.length > 0) {
-          const user = result[0];
-          const match = await bcrypt.compare(password, user.pw);
-          if (match) {
-            console.log("hi")
-            res.json({ status: true, result });
-          } else {
-            res.json({ status: false, message: "아이디 또는 비밀번호가 일치하지 않습니다." });
-          }
-        } else {
-          res.json({ status: false, message: "아이디 또는 비밀번호가 일치하지 않습니다." });
-        }
+        res.json({ status: true, results });
       }
-    });
-  };
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  })
+};
 
-  exports.ManagerUserList = async (req, res) => {
+exports.logoutUser = async (req, res) => {
+  try {
+    res.cookie('accessToken', '');
+    res.status(200).json("Logout Success");
+  } catch (error) {
+    res.status(500).json(error);
+  }
+}
 
-    const sql = `SELECT u.id, u.name, DATE_FORMAT(u.join_date, '%Y-%m-%d') as join_date, IFNULL(COUNT(r.name), 0) as count 
+exports.ManagerUserList = async (req, res) => {
+
+  const sql = `SELECT u.id, u.name, DATE_FORMAT(u.join_date, '%Y-%m-%d') as join_date, IFNULL(COUNT(r.name), 0) as count 
     FROM user u LEFT JOIN report r ON u.name = r.name
     GROUP BY u.id, u.name, join_date
     ORDER BY count DESC;`
+
+  connection.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result)
+      res.json(result)
+    }
+  })
+};
+
+exports.loginKeep = (req, res) => {
+    try{
+      const token = req.cookies.refreshToken;
+      const data = jwt.verify(token, process.env.REFRECH_SECRET);
   
-     connection.query(sql, (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(result)
-        res.json(result)
-      }
-    })
-  };
+      const query = "select * from USER where id = ?";
   
+      connection.query(query, [data.id], (err, results) => {
+        try {
+          if (err) {
+            console.log(err);
+          } else {
+            // access Token 새로 발급
+            const accessToken = jwt.sign(
+              {
+                id: data.id,
+                username: data.name,
+                phoneNumber: data.phone_number,
+              },
+              process.env.ACCESS_SECRET,
+              {
+                expiresIn: '1m',
+                issuer: 'About Tech',
+              }
+            );
+            res.cookie('accessToken', accessToken, {
+              secure: false,
+              httpOnly: true,
+            }).json({});
+          }
+        } catch (error) {
+          res.status(500).json(error);
+        }
+      })
+    }catch (error) {
+      res.status(500).json(error);
+    }
+};

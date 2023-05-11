@@ -33,10 +33,15 @@ function Login() {
 
     const { password, id, phoneNumber } = values;
 
-    const { data } = await axios.post("http://localhost:3001/user/login", {
-      id,
-      password,
-      phoneNumber,
+    const { data } = await axios({
+      url:"http://localhost:3001/user/login", 
+      method: "POST",
+      withCredentials: true,
+      data: {
+        id: id,
+        password: password,
+        phoneNumber: phoneNumber,
+      }
     })
 
     if (data.status === false) {
@@ -45,7 +50,7 @@ function Login() {
 
     const userInfo = data.result[0];
 
-    if (data.status === true){
+    if (data.status === true) {
       sessionStorage.setItem("username", JSON.stringify(userInfo));
       navigate("/");
     }
@@ -54,6 +59,7 @@ function Login() {
   const goResi = () => {
     navigate("/register")
   }
+
 
   return (
     <>
@@ -156,6 +162,7 @@ const FormContainer = styled.div`
       cursor: pointer;
     }
   }
+
 `;
 
 export default Login;

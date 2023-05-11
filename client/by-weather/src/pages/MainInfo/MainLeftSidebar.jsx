@@ -30,12 +30,14 @@ function MainLeftSidebar(props) {
       setSelected(selected.filter(value => value !== checkboxValue));
     }
   }
-  
+
   const clothes = selected.join(',');
 
   const name = userInfo.name;
 
-  const rain = props.main && props.main.rain ? props.main.rain["1h"] : null;
+  const rain = props.main && props.main.rain ? props.main.rain : null;
+
+  console.log(props)
 
   const byWeather = {
     username: name,           //이름
@@ -94,9 +96,17 @@ function MainLeftSidebar(props) {
   }
 
   const logout = () => {
-    sessionStorage.clear();
-    navigate('/login')
-  }
+    axios({
+      url:"http://localhost:3001/user/logout", 
+      method: "POST",
+      withCredentials: true,
+    }).then((result) => {
+      if (result.status === 200) {
+        sessionStorage.clear();
+        navigate('/login')
+      }
+    });
+  };
 
   const [selectedTab, setSelectedTab] = useState(null);
 
@@ -105,6 +115,8 @@ function MainLeftSidebar(props) {
   };
 
   const [showDiv, setShowDiv] = useState(false);
+
+
 
   return (
     <>
