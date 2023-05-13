@@ -55,7 +55,7 @@ exports.loginUser = async (req, res) => { //토큰이 지급이 안됌
               username: user.name,
               phoneNumber: user.phone_number,
             }, process.env.ACCESS_SECRET, {
-              expiresIn: '1m',
+              expiresIn: '60m',
               issuer: 'About Tech',
             });
 
@@ -79,8 +79,11 @@ exports.loginUser = async (req, res) => { //토큰이 지급이 안됌
               secure: false,
               httpOnly: true,
             })
-            console.log(accessToken);
-            res.json({ status: true, result });
+
+            const { name, ...others} = user;
+            console.log(name)
+
+            res.json({ status: true, name });
 
           } catch (error) {
             res.status(500).json(error);
@@ -96,13 +99,14 @@ exports.loginSuccess = (req, res) => {
   const token = req.cookies.accessToken;
   const data = jwt.verify(token, process.env.ACCESS_SECRET);
 
-  const query = "select id, name from USER where id = ?";
+  const query = "select name from USER where id = ?";
 
   connection.query(query, [data.id], (err, results) => { // change error to err
     try {
       if (err) {
         console.log(err);
       } else {
+        console.log(results)
         res.json({ status: true, results });
       }
     } catch (error) {

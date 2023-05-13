@@ -17,7 +17,7 @@ function MainContent(props) {
 
     const navigate = useNavigate();
 
-    const userInfo = JSON.parse(sessionStorage.getItem("username"));
+    const name = JSON.parse(sessionStorage.getItem("username"));
 
     const deleteItem = async (temperature, name, date) => {
 
@@ -35,8 +35,6 @@ function MainContent(props) {
             setSelected(selected.filter(value => value !== checkboxValue));
         }
     }
-
-    const name = userInfo.name;
 
     useEffect(() => {
         getData();

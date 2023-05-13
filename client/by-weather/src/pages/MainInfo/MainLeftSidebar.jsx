@@ -11,6 +11,8 @@ import save from "../image/submit.png";
 
 function MainLeftSidebar(props) {
 
+  console.log(props)
+
   const [explanation, setExplanation] = useState();
   const [selected, setSelected] = useState([]);
   const [mainData, setMainData] = useState([]);
@@ -18,7 +20,7 @@ function MainLeftSidebar(props) {
 
   const navigate = useNavigate();
 
-  const userInfo = JSON.parse(sessionStorage.getItem("username"));
+  const name = JSON.parse(sessionStorage.getItem("username"));
   const nowTime = moment().format("YYYY-MM-DD"); //오늘 날짜 뽑기
 
 
@@ -33,7 +35,7 @@ function MainLeftSidebar(props) {
 
   const clothes = selected.join(',');
 
-  const name = userInfo.name;
+  // const name = userInfo.name;
 
   const rain = props.main && props.main.rain ? props.main.rain : null;
 
@@ -87,8 +89,8 @@ function MainLeftSidebar(props) {
   }, [name]);
 
   useEffect(() => {
-    const sessionStorageValue = userInfo.id;
-    setShowAdminButton(sessionStorageValue === 'manager');
+    const sessionStorageValue = name;
+    setShowAdminButton(sessionStorageValue === '관리자');
   }, []);
 
   const Manager = () => {

@@ -14,6 +14,7 @@ function Main(props) {
   const [coords, saveCoords] = useState();
   const [weatherData, setWeatherData] = useState({});
   const [isPlaying, setPlaying] = useState(false)
+  const [User, setUser] = useState();
 
 
   function handleGeoSucc(position) {  // geolocation API를 이용하여 현재 위치를 가져오는데 성공했을 때 호출되는 함수입니다.
@@ -78,7 +79,8 @@ function Main(props) {
       })
         .then((result) => {
           if (result.data) {
-            console.log(result.data)
+            setUser(result.data.results[0].name)
+            //sessionStorage.setItem("username", JSON.stringify(userInfo));
           }
         })
         .catch((error) => {
@@ -97,10 +99,6 @@ function Main(props) {
     // Delay in milliseconds or null to stop it
     isPlaying ? 59 * 60 * 1000 : null,
   );
-  // // 최초 한 번은 바로 호출
-  // useEffect(() => {
-  //   refreshToken();
-  // }, []);
 
   const refreshToken = () => {
     axios({

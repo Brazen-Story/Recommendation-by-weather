@@ -48,10 +48,8 @@ function Login() {
       console.log("err")
     }
 
-    const userInfo = data.result[0];
-
     if (data.status === true) {
-      sessionStorage.setItem("username", JSON.stringify(userInfo));
+      sessionStorage.setItem("username", JSON.stringify(data.name));
       navigate("/");
     }
   }
