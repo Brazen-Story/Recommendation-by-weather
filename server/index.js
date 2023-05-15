@@ -5,6 +5,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRoutes = require('./routes/userRoutes');
 const ReportRoutes = require('./routes/reportRoutes');
+const AdRoutes = require('./routes/AdRoutes');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -40,6 +41,7 @@ connection.query(user + report, function (error, results, fields) {
 
 app.use('/user', userRoutes);
 app.use('/report', ReportRoutes);
+app.use('/ad', AdRoutes);
 
 //connection.end();
 
