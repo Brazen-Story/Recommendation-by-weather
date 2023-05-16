@@ -2,15 +2,12 @@ const express = require('express');
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const userRoutes = require('./routes/userRoutes');
-const ReportRoutes = require('./routes/reportRoutes');
 const dotenv = require('dotenv');
+const adRoutes = require('./routes/adRoutes')
 
 dotenv.config();
 
 app.use(express.json());
-app.use(cookieParser());
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -19,30 +16,29 @@ app.use(
   })
 );
 
-
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'kim0523',
-  database: 'byWeather',
+  database: 'ad_byweather',
   multipleStatements: true,
 });
 
 connection.connect();
 
-var user = "SELECT * FROM USER;";
-var report = "SELECT * FROM REPORT;"
+var Information = "SELECT * FROM ad_information_tb;";
+var Click = "SELECT * FROM ad_click_tb;"
+var Impression = "SELECT * FROM ad_impression_tb"
 
-connection.query(user + report, function (error, results, fields) {
+connection.query(Information + Click + Impression, function (error, results, fields) {
   if (error) throw error;
   //console.log('The solution is: ', results);
 });
 
-app.use('/user', userRoutes);
-app.use('/report', ReportRoutes);
+app.use('/ad', adRoutes);
 
 //connection.end();
 
-app.listen(process.env.PORT, () => {
+app.listen(4001, () => {
   console.log("your server is running on port 3001");
 });
