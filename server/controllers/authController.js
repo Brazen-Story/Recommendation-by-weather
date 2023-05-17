@@ -5,8 +5,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10; // salt의 자릿수
 const jwt = require("jsonwebtoken");
 
-let refreshTokenInterval;
-
 exports.createUser = async (req, res) => { //회원가입 로그인페이지
   const id = req.body.id;
   const phoneNumber = req.body.phoneNumber;
@@ -162,7 +160,7 @@ exports.loginKeep = (req, res) => {
               },
               process.env.ACCESS_SECRET,
               {
-                expiresIn: '1m',
+                expiresIn: '60m',
                 issuer: 'About Tech',
               }
             );

@@ -145,5 +145,5 @@
       bottom: 0;
       left: 10px;
       margin-bottom: 20px;
-      position: absolute;
+      position: fixed;
 }

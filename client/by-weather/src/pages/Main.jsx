@@ -8,7 +8,6 @@ import "./css/main.css"
 import axios from "axios";
 import { useInterval } from 'usehooks-ts'
 
-
 function Main(props) {
 
   const [coords, saveCoords] = useState();
@@ -68,27 +67,6 @@ function Main(props) {
 
   useEffect(() => {
     requestCoords();
-  }, []);
-
-  useEffect(() => {
-    try {
-      axios({
-        url: "http://localhost:3001/user/success",
-        method: "GET",
-        withCredentials: true,
-      })
-        .then((result) => {
-          if (result.data) {
-            setUser(result.data.results[0].name)
-            //sessionStorage.setItem("username", JSON.stringify(userInfo));
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
   }, []);
 
   useInterval(

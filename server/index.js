@@ -43,6 +43,6 @@ app.use('/report', ReportRoutes);
 
 //connection.end();
 
-app.listen(process.env.PORT, () => {
+app.listen(3001, () => {
   console.log("your server is running on port 3001");
 });

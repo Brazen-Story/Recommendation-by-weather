@@ -11,8 +11,6 @@ import save from "../image/submit.png";
 
 function MainLeftSidebar(props) {
 
-  console.log(props)
-
   const [explanation, setExplanation] = useState();
   const [selected, setSelected] = useState([]);
   const [mainData, setMainData] = useState([]);
@@ -38,8 +36,6 @@ function MainLeftSidebar(props) {
   // const name = userInfo.name;
 
   const rain = props.main && props.main.rain ? props.main.rain : null;
-
-  console.log(props)
 
   const byWeather = {
     username: name,           //이름
