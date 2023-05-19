@@ -10,6 +10,8 @@ function MainRightSidebar(props) {
     const [data, setData] = useState([]);
     // const [filteredData, setFilteredData] = useState([]);
     const [fashionName, setFashionName] = useState('');
+    // const [category, setCategory] = useState('');
+
 
     const getData = async () => {
         try {
@@ -20,13 +22,6 @@ function MainRightSidebar(props) {
         }
     };
 
-
-    // const filteredData = data
-    // .filter((item) => item.temperature === props.main.temp)
-    // .map((item) => item.fashion_list.map((fashion) => ({
-    //   fashion: fashion.fashion,
-    // })));
-    // 데이터 필터링 및 저장
 
 
     useEffect(() => {
@@ -45,7 +40,8 @@ function MainRightSidebar(props) {
         }
     }, [data, props.main.temp]);
 
-    console.log(fashionName)
+
+
 
     return (
         <>
@@ -68,7 +64,7 @@ function MainRightSidebar(props) {
                             )))}
                     </tbody>
                 </table>
-                <Advertising data={fashionName} />
+                <Advertising fashionName={fashionName} />
             </div>
         </>
     );
