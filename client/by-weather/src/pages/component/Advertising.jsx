@@ -1,56 +1,107 @@
-  //옷 분류를 해줘야함.
-  //clothes.json에서 props.topData에 포함되어있는 Key를 찾아야함.
+import React, { useState, useEffect } from "react";
+import clothesData from '../json/clothes.json';
+import axios from "axios";
 
+function Advertising() {
 
+  // console.log(props.fashionName)
+  // const [category, setCategory] = useState('');
+  // const [AD, setAD] = useState([]);
+
+  // useEffect(() => {
+  //   const findCategory = () => {
+  //     for (const categoryName in clothesData) {
+  //       const foundItem = clothesData[categoryName].find(
+  //         (item) => item.value === props.fashionName
+  //       );
+  //       if (foundItem) {
+  //         setCategory(categoryName);
+  //         break;
+  //       }
+  //     }
+  //   };
+
+  //   findCategory();
+  // }, [props.fashionName]);
 
 
   // useEffect(() => {
+  //   const getAD = async () => {
+  //     const response = await axios.get(`http://localhost:4001/ad/data/${category}`)
+  //     setAD(response.data);
+  //   }
+
   //   getAD();
-  // }, [])
-  import React, { useState, useEffect } from "react";
-  import clothesData from '../json/clothes.json';
-  import axios from "axios";
-
-  function Advertising (props) {
-
-    const [category, setCategory] = useState('');
-    const [AD, setAD] = useState([]);
+  // }, [category]);
 
 
-    useEffect(() => {
-      const findCategory = () => {
-        for (const categoryName in clothesData) {
-          const foundItem = clothesData[categoryName].find(
-            (item) => item.value === props.fashionName
-          );
-          if (foundItem) {
-            setCategory(categoryName);
-            break;
-          }
-        }
-      };
-  
-      findCategory();
-    }, [props.fashionName]);
+  // console.log(AD)
+  // console.log(props.fashionName);
+  // const [category, setCategory] = useState('');
+  // const [AD, setAD] = useState([]);
 
-  const getAD = async() => {
-    const response = await axios.get(`http://localhost:4001/ad/data/${category}`)
-    setAD(response.data);
-  }
+  // useEffect(() => {
+  //   const findCategory = () => {
+  //     for (const categoryName in clothesData) {
+  //       const foundItem = clothesData[categoryName].find(
+  //         (item) => item.value === props.fashionName
+  //       );
+  //       if (foundItem) {
+  //         setCategory(categoryName);
+  //         break;
+  //       }
+  //     }
+  //   };
 
-  useEffect(() => {
-    getAD();
-  }, [category]);
+  //   findCategory();
+  // }, [clothesData, props.fashionName]);
 
 
+  // useEffect(() => {
+  //   const getAD = async () => {
+  //     const response = await axios.get(`http://localhost:4001/ad/data/${category}`)
+  //     setAD(response.data);
+  //   };
 
-    return(
-      <>
-        {AD}
-      </>
-    );
-  }
+  //   if (category) {
+  //     getAD();
+  //   }
+  // }, [category]);
+  // const [data, setData] = useState([]);
+  // const [fashionName, setFashionName] = useState('');
 
-  export default Advertising;
+  // const getData = async () => {
+  //   try {
+  //     const response = await axios.get(`http://localhost:3001/report/manager`);
+  //     setData(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+
+  // useEffect(() => {
+  //   const firstFashion = data.find(
+  //     (item) => item.temperature === props.main.temp
+  //   )?.fashion_list[0]?.fashion;
+
+  //   if (firstFashion) {
+  //     setFashionName(firstFashion);
+  //   }
+  // }, [data, props.main.temp]);
+
+
+
+  return (
+    <>
+      {/* <button onClick={link}>
+        <img src={imageUrl} alt="Image" />  
+      </button> */}
+
+    </>
+  );
+}
+
+export default Advertising;
 
 

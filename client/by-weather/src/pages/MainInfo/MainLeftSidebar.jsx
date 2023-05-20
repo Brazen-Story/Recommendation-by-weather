@@ -8,6 +8,7 @@ import moment from "moment";
 import option from "../json/clothes.json";
 import '../css/mainSidebar.css';
 import save from "../image/submit.png";
+// Recommendation by weather\client\by-weather\src\pages\image\skirt.png
 
 function MainLeftSidebar(props) {
 
