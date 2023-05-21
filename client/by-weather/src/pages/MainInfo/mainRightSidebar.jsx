@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef  } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import "moment/locale/ko";
 import axios from "axios";
@@ -11,6 +11,8 @@ function MainRightSidebar(props) {
     const [data, setData] = useState([]);
     const [fashionName, setFashionName] = useState();
     const [AD, setAD] = useState([]);
+    const [count, setCount] = useState(1);
+
     const getData = async () => {
         try {
             const response = await axios.get(`http://localhost:3001/report/manager`);
@@ -50,7 +52,6 @@ function MainRightSidebar(props) {
 
     useEffect(() => {
         findCategory();
-
     }, [fashionName]);
 
     useEffect(() => {
@@ -65,20 +66,63 @@ function MainRightSidebar(props) {
         }
     }, [category]);
 
-    const Advertising = {
-        Url: AD[0].Ad_Image_Url,
-        ID: AD[0].Ad_ID,
-        Name: AD[0].Ad_Name,
-        link: AD[0].Ad_link,
-    }
+    const [Advertising, setAdvertising] = useState({});
 
-    console.log(Advertising.Url)
+    useEffect(() => {
+        if (AD && AD.length > 0) {
+            const newAdvertising = {
+                Url: AD[0].Ad_Image_Url,
+                ID: AD[0].Ad_ID,
+                Name: AD[0].Ad_Name,
+                link: AD[0].Ad_link,
+            };
+            setAdvertising(newAdvertising);
+        } else {
+            setAdvertising({});
+        }
+    }, [AD]);
 
-    const link = () => {
-        window.open(Advertising.link, '_blank');
-    }
+    const advertisingId = Advertising.ID;
 
+    const link = async () => {
+        // setCount(1); // 카운트를 0으로 초기화
+        setCount(count + 1); // 카운트를 1씩 증가시킴
 
+        try {
+          const response = await axios.post("http://localhost:4001/ad/count", { advertisingId });
+          if (response.status === 200) {
+            window.open(Advertising.link, '_blank')
+          }else {
+            return Promise.reject(new Error('server err'))
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      const buttonRef = useRef(null);
+
+      useEffect(() => {
+        if (buttonRef.current && Advertising.ID !== undefined) {
+          const imgElement = buttonRef.current.querySelector(".AdImg");
+          if (imgElement.complete) {
+            sendRequest();
+          } else {
+            imgElement.addEventListener("load", sendRequest);
+          }
+        }
+      }, [Advertising.ID]);
+
+      const sendRequest = async () => {
+        try {
+          console.log(advertisingId)
+          const response = await axios.post("http://localhost:4001/ad/request", {advertisingId});
+          console.log(response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+    //값이 있다면 보내라.
     return (
         <>
             <div className="RightSidebar">
@@ -100,9 +144,12 @@ function MainRightSidebar(props) {
                             )))}
                     </tbody>
                 </table>
-                {/* <button onClick={link}>
-                    <img src={Advertising.Url}  />
-                </button> */}
+                <div>
+                    <button className="AdBtn" onClick={link} ref={buttonRef}>
+                        <img className="AdImg" src={Advertising.Url} />
+                    </button>
+                </div>
+
             </div>
         </>
     );

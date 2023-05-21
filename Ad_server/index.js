@@ -40,5 +40,5 @@ app.use('/ad', adRoutes);
 //connection.end();
 
 app.listen(4001, () => {
-  console.log("your server is running on port 3001");
+  console.log("your server is running on port 4001");
 });
