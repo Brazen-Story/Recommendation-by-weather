@@ -8,6 +8,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import "./css/manager.css";
 import Userlist from "./Userlist";
 import Datalist from "./Datalist";
+import Adlist from "./managerInfo/Adlist";
 
 //유저 정보 가져오기
 
@@ -32,9 +33,11 @@ function Manager() {
         <div className="button-container">
           <button className="manager_btn" onClick={() => handleButtonClick("datalist")}>Data List</button>
           <button className="manager_btn" onClick={() => handleButtonClick("userlist")}>User List</button>
+          <button className="manager_btn" onClick={() => handleButtonClick("adlist")}>ad List</button>
         </div>
         {list === "datalist" && <Datalist />}
         {list === "userlist" && <Userlist />}
+        {list === "adlist" && <Adlist />}
       </div>
 
       <button className="home_btn" onClick={()=>home()}></button>

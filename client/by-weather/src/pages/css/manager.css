@@ -129,6 +129,10 @@
   margin-right: 20px;
 }
 
+.Manager .button-container button:nth-child(2) {
+  margin-right: 20px;
+}
+
 .manager_search_input{
   width: 50%;
 }

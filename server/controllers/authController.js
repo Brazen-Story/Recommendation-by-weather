@@ -104,7 +104,6 @@ exports.loginSuccess = (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        console.log(results)
         res.json({ status: true, results });
       }
     } catch (error) {
@@ -133,7 +132,6 @@ exports.ManagerUserList = async (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(result)
       res.json(result)
     }
   })
