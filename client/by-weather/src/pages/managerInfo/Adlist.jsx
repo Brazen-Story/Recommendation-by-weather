@@ -54,7 +54,7 @@ function Adlist() {
             </div>
             <br />
             <div className={`manager-wrapper${showDiv ? ' show-chart' : ''}`}>
-                <div className="manager-table">
+                <div>
                     <AdTable manager={AdData} />
                 </div>
             </div>

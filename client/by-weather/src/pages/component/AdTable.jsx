@@ -16,9 +16,9 @@ function AdTable(props) { //AdTable의 Top이 추가되는 Err
     };
     return (
         <>
-            <table>
+      <table className="managerTable">
                 <thead>
-                    <tr>
+                <tr className="tr_head">
                         <th>Ad_ID</th>
                         <th>Ad_Click_Count</th>
                         <th>Click_Revenue</th>

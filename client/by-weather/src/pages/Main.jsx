@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { useNavigate } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
 import "moment/locale/ko";
 import MainLeftSidebar from "./MainInfo/MainLeftSidebar";
@@ -15,6 +16,7 @@ function Main(props) {
   const [isPlaying, setPlaying] = useState(false)
   const [User, setUser] = useState();
 
+  const navigate = useNavigate();
 
   function handleGeoSucc(position) {  // geolocation API를 이용하여 현재 위치를 가져오는데 성공했을 때 호출되는 함수입니다.
     const latitude = position.coords.latitude;  // 경도  
@@ -66,6 +68,9 @@ function Main(props) {
   }
 
   useEffect(() => {
+    if(JSON.parse(sessionStorage.getItem("username")) === null){
+      navigate('/login');
+    }
     requestCoords();
   }, []);
 
@@ -85,6 +90,8 @@ function Main(props) {
       withCredentials: true,
     });
   }
+
+  //스토리지 비어 있으면 로그인페이지.
 
   return (
     <>
