@@ -35,7 +35,6 @@ var report = "SELECT * FROM REPORT;"
 
 connection.query(user + report, function (error, results, fields) {
   if (error) throw error;
-  //console.log('The solution is: ', results);
 });
 
 app.use('/user', userRoutes);

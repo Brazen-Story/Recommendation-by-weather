@@ -49,7 +49,7 @@ function MainContent(props) {
         }
     }
 
-    const getData = async() => {
+    const getData = async () => {
         try {
             const response = await axios.get(`http://localhost:3001/report/data/${name}`)
             setMainData(response.data);
@@ -57,7 +57,6 @@ function MainContent(props) {
             console.log("데이터 수집 오류");
         }
     };
-    
 
     useEffect(() => {
         if (moveData[0] !== 0) {
@@ -68,8 +67,6 @@ function MainContent(props) {
     const dataMove = (a) => { //수정
         setMoveData([a]);
     }
-
-
 
     return ( //순서
         <>
@@ -101,7 +98,6 @@ function MainContent(props) {
                                 <div className="double_btn">
                                     <button className="body_btn" onClick={() => dataMove(item)}>
                                         <img src={edit} alt="icon" /> <span> 수정 </span>  </button>
-
                                     {" "}
                                     <button className="body_btn" onClick={() => deleteItem(item.temperature, item.name, item.date)}>
                                         <img src={del} alt="icon" /> <span> 삭제 </span> </button>

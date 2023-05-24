@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
@@ -21,29 +21,29 @@ function Register() {
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
-const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
 
-  event.preventDefault();
+    event.preventDefault();
 
-  console.log({
-    username: username,
-    id: id,
-    password: password,
-    phoneNumber: phoneNumber,
-  })
+    console.log({
+      username: username,
+      id: id,
+      password: password,
+      phoneNumber: phoneNumber,
+    })
 
-  axios.post("http://localhost:3001/user/create", {
-    username: username,
-    id: id,
-    password: password,
-    phoneNumber: phoneNumber,
-  }).then(navigate("/login"))
-}
+    axios.post("http://localhost:3001/user/create", {
+      username: username,
+      id: id,
+      password: password,
+      phoneNumber: phoneNumber,
+    }).then(navigate("/login"))
+  }
 
   return (
     <>
       <FormContainer>
-      <form onSubmit={(event) => handleSubmit(event)}>
+        <form onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
             <h1>Register</h1>
           </div>

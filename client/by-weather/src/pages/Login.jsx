@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import {  useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
@@ -70,7 +70,6 @@ function Login() {
             type="text"
             placeholder="id"
             name="id"
-            // onChange={(e) => setId(e.target.value)}
             onChange={(e) => handleChange(e)}
             min="3"
           />
@@ -78,7 +77,6 @@ function Login() {
             type="password"
             placeholder="Password"
             name="password"
-            // onChange={(e) => setPassword(e.target.value)}
             onChange={(e) => handleChange(e)}
           />
           <button type="submit">Login In</button>

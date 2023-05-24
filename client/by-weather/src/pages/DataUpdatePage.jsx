@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { json, Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "moment/locale/ko";
-import moment from "moment";
 import option from "./json/clothes.json";
 import "./css/DataUpdatePage.css"
 
@@ -48,8 +47,6 @@ function DataUpdatePage() {
     }
   }
 
-  console.log(selected)
-  console.log(explanation)
   return ( //순서
     <>
       <div>
@@ -117,19 +114,4 @@ function DataUpdatePage() {
   );
 }
 
-const FormContainer = styled.div`
-overflow: hidden;
-min-width: auto;
-top: 0px;
-bottom: 0px;
-left: 0px;
-right: 0px;
-li {
-    margin-top : 10px;
-    padding: 10px;
-    border : solid 1px;
-}
-
-
-  `;
 export default DataUpdatePage;

@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
-import styled from "styled-components";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import ManagerTable from "./managerInfo/managerTable"
@@ -47,7 +44,8 @@ function Datalist() {
                     name="temp"
                     value={findTemp}
                     onChange={(e) => setFindTemp(e.target.value)}
-                />                <button className="manager_search_btn" onClick={() => findData()}></button>
+                />
+                <button className="manager_search_btn" onClick={() => findData()}></button>
                 <button className="manager_refresh_btn" onClick={() => getReportData()}></button>
             </div>
             <div className={`manager-wrapper${showDiv ? ' show-chart' : ''}`}>

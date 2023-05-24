@@ -30,7 +30,7 @@ exports.createUser = async (req, res) => { //회원가입 로그인페이지
   });
 }
 
-exports.loginUser = async (req, res) => { //토큰이 지급이 안됌
+exports.loginUser = async (req, res) => {
   const id = req.body.id;
   const password = req.body.password;
   const LoginSql = "SELECT * FROM USER WHERE id = ?;";
@@ -99,7 +99,7 @@ exports.loginSuccess = (req, res) => {
 
   const query = "select name from USER where id = ?";
 
-  connection.query(query, [data.id], (err, results) => { // change error to err
+  connection.query(query, [data.id], (err, results) => {
     try {
       if (err) {
         console.log(err);

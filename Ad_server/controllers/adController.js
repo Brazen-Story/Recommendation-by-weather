@@ -15,25 +15,6 @@ exports.getData = (req, res) => {
   })
 }
 
-// exports.counting = (req, res) => {
-
-//   //﻿mysql> ALTER TABLE 테이블 이름 AUTO_INCREMENT=변경할 숫자;
-
-//   const Id = req.body.advertisingId;
-
-//   const query = "INSERT INTO ad_click_tb (Ad_ID, click_Time, Click_Revenue) VALUES (?, CURRENT_TIMESTAMP(), (Ad_Click_Count)*0.01)";
-
-//   connection.query(query, [Id], (error, results) => {
-//     if (error) {
-//       console.error(error);
-//       res.status(500).json({ message: "Error inserting data into ad_click_tb" });
-//     } else {
-//       console.log("Data inserted into ad_click_tb");
-//       res.status(200).json({ message: "Data inserted successfully" });
-//     }
-//   });
-// }
-
 exports.counting = (req, res) => {
 
   const advertisingId = req.body.advertisingId;
@@ -72,7 +53,6 @@ exports.exposed = (req, res) => {
 
   const advertisingId = req.body.advertisingId;
 
-  // Find the maximum Ad_Click_Count value in ad_click_tb
   const maxCountQuery = "SELECT MAX(Impression_Count) AS MaxCount FROM ad_impression_tb";
   connection.query(maxCountQuery, (error, results) => {
     if (error) {
@@ -134,9 +114,7 @@ ORDER BY
   Impression_Time DESC,
   Click_Time DESC;
 
-
 `
-
   connection.query(sql, (error, results) => {
     if (error) {
       console.error(error);

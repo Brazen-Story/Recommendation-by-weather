@@ -8,7 +8,6 @@ import moment from "moment";
 import option from "../json/clothes.json";
 import '../css/mainSidebar.css';
 import save from "../image/submit.png";
-// Recommendation by weather\client\by-weather\src\pages\image\skirt.png
 
 function MainLeftSidebar(props) {
 
@@ -33,8 +32,6 @@ function MainLeftSidebar(props) {
   }
 
   const clothes = selected.join(',');
-
-  // const name = userInfo.name;
 
   const rain = props.main && props.main.rain ? props.main.rain : null;
 
@@ -96,7 +93,7 @@ function MainLeftSidebar(props) {
 
   const logout = () => {
     axios({
-      url:"http://localhost:3001/user/logout", 
+      url: "http://localhost:3001/user/logout",
       method: "POST",
       withCredentials: true,
     }).then((result) => {
@@ -114,8 +111,6 @@ function MainLeftSidebar(props) {
   };
 
   const [showDiv, setShowDiv] = useState(false);
-
-
 
   return (
     <>
@@ -181,11 +176,7 @@ const FormContainer = styled.div`
   height: 100%;
   margin-top: 10px;
 
-  position:fixed;
-
-  
-
-  
+  position:fixed;  
 `;
 
 export default MainLeftSidebar;

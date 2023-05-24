@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
-import styled from "styled-components";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "./css/Userlist.css"
@@ -32,8 +29,6 @@ function Userlist() {
       getUserData();
     }
   }
-
-  console.log(findTemp)
 
   return (
     <>

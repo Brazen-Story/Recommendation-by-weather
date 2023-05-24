@@ -16,14 +16,12 @@
 
 .AdBtn {
   height: 300px;
-  width: 210px;
+  width: 193px;
   border-radius: none;
   border: none;
   background-color: #F4F4F5;
   bottom: 20px; /* 하단 여백 조정 */
-  position: absolute;
-  transform: translateX(-50%); /* 수평 가운데 정렬을 위한 이동 */
-  right: 280px;
+  margin-top: 100%;
 }
 
 

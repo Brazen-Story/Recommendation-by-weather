@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { ToastContainer } from "react-toastify";
+import React from "react";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import "../css/managerChart.css"
 
+function AdTable(props) {
 
-function AdTable(props) { //AdTable의 Top이 추가되는 Err
-    console.log(props.manager)
     const formatDateTime = (datetimeString) => {
         const datetime = new Date(datetimeString);
         const formattedDatetime = datetime.toISOString().replace("T", " ").slice(0, 19);
@@ -16,9 +11,9 @@ function AdTable(props) { //AdTable의 Top이 추가되는 Err
     };
     return (
         <>
-      <table className="managerTable">
+            <table className="managerTable">
                 <thead>
-                <tr className="tr_head">
+                    <tr className="tr_head">
                         <th>Ad_ID</th>
                         <th>Ad_Click_Count</th>
                         <th>Click_Revenue</th>

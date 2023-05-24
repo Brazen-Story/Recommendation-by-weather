@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate, useParams } from 'react-router-dom';
-import styled from "styled-components";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import "./css/manager.css";
 import Userlist from "./Userlist";
 import Datalist from "./Datalist";
 import Adlist from "./managerInfo/Adlist";
-
-//유저 정보 가져오기
 
 function Manager() {
 
@@ -39,8 +33,7 @@ function Manager() {
         {list === "userlist" && <Userlist />}
         {list === "adlist" && <Adlist />}
       </div>
-
-      <button className="home_btn" onClick={()=>home()}></button>
+      <button className="home_btn" onClick={() => home()}></button>
     </>
   );
 }

@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
-import styled from "styled-components";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import AdTable from "../component/AdTable";
@@ -36,8 +33,6 @@ function Adlist() {
         }
     };
 
-    console.log(findTemp)
-
     return (
         <>
             <div className="manager_search">
@@ -48,7 +43,7 @@ function Adlist() {
                     name="temp"
                     value={findTemp}
                     onChange={(e) => setFindTemp(e.target.value)}
-                />                
+                />
                 <button className="manager_search_btn" onClick={() => findData()}></button>
                 <button className="manager_refresh_btn" onClick={() => getAdData()}></button>
             </div>

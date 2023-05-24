@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
 import "moment/locale/ko";
@@ -76,10 +76,8 @@ function Main(props) {
 
   useInterval(
     () => {
-      // Your custom logic here
       refreshToken();
     },
-    // Delay in milliseconds or null to stop it
     isPlaying ? 59 * 60 * 1000 : null,
   );
 
@@ -90,8 +88,6 @@ function Main(props) {
       withCredentials: true,
     });
   }
-
-  //스토리지 비어 있으면 로그인페이지.
 
   return (
     <>

@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef  } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import "moment/locale/ko";
 import axios from "axios";
 import '../css/mainRightSidebar.css';
-import Advertising from "../component/Advertising";
 import clothesData from '../json/clothes.json';
 
 function MainRightSidebar(props) {
@@ -24,13 +23,12 @@ function MainRightSidebar(props) {
 
     useEffect(() => {
         getData();
-        //배너 노출 횟수 추가 (함수 호출)
     }, []);
 
     const [category, setCategory] = useState('');
 
-
     useEffect(() => {
+
         const firstFashion = data.find((item) => item.temperature === props.main.temp);
 
         if (firstFashion) {
@@ -59,10 +57,8 @@ function MainRightSidebar(props) {
             const getAD = async () => {
                 const response = await axios.get(`http://localhost:4001/ad/data/${category}`);
                 setAD(response.data);
-
             };
             getAD();
-
         }
     }, [category]);
 
@@ -89,40 +85,40 @@ function MainRightSidebar(props) {
         setCount(count + 1); // 카운트를 1씩 증가시킴
 
         try {
-          const response = await axios.post("http://localhost:4001/ad/count", { advertisingId });
-          if (response.status === 200) {
-            window.open(Advertising.link, '_blank')
-          }else {
-            return Promise.reject(new Error('server err'))
-          }
+            const response = await axios.post("http://localhost:4001/ad/count", { advertisingId });
+            if (response.status === 200) {
+                window.open(Advertising.link, '_blank')
+            } else {
+                return Promise.reject(new Error('server err'))
+            }
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      };
+    };
 
-      const buttonRef = useRef(null);
+    const buttonRef = useRef(null);
 
-      useEffect(() => {
+    useEffect(() => {
         if (buttonRef.current && Advertising.ID !== undefined) {
-          const imgElement = buttonRef.current.querySelector(".AdImg");
-          if (imgElement.complete) {
-            sendRequest();
-          } else {
-            imgElement.addEventListener("load", sendRequest);
-          }
+            const imgElement = buttonRef.current.querySelector(".AdImg");
+            if (imgElement.complete) {
+                sendRequest();
+            } else {
+                imgElement.addEventListener("load", sendRequest);
+            }
         }
-      }, [Advertising.ID]);
+    }, [Advertising.ID]);
 
-      const sendRequest = async () => {
+    const sendRequest = async () => {
         try {
-          console.log(advertisingId)
-          const response = await axios.post("http://localhost:4001/ad/request", {advertisingId});
-          console.log(response.data);
+            console.log(advertisingId)
+            const response = await axios.post("http://localhost:4001/ad/request", { advertisingId });
+            console.log(response.data);
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      };
-    //값이 있다면 보내라.
+    };
+
     return (
         <>
             <div className="RightSidebar">
@@ -134,22 +130,24 @@ function MainRightSidebar(props) {
                             </td>
                         </tr>
                         {data.filter((item) => item.temperature === props.main.temp)
-                            .map((item) => item.fashion_list.map((fashion, index) => (
+                            .map((item) => item.fashion_list.slice(0, 5).map((fashion, index) => (
                                 <React.Fragment key={index}>
                                     <tr>
                                         <td className="Right_td">{index + 1}</td>
                                         <td className="Right_td">{fashion.fashion}</td>
                                     </tr>
                                 </React.Fragment>
-                            )))}
+                            )))
+                        }
                     </tbody>
                 </table>
                 <div>
                     <button className="AdBtn" onClick={link} ref={buttonRef}>
-                        <img className="AdImg" src={Advertising.Url} />
+                        <div className="AdImgContainer">
+                            <img className="AdImg" src={Advertising.Url} />
+                        </div>
                     </button>
                 </div>
-
             </div>
         </>
     );
