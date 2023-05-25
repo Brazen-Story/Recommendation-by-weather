@@ -4,6 +4,8 @@ const connection = db.connection;
 const bcrypt = require('bcrypt');
 const saltRounds = 10; // salt의 자릿수
 const jwt = require("jsonwebtoken");
+const socketIO = require('../socket'); // Import the socket.io instance
+
 
 exports.createUser = async (req, res) => { //회원가입 로그인페이지
   const id = req.body.id;
@@ -30,6 +32,67 @@ exports.createUser = async (req, res) => { //회원가입 로그인페이지
   });
 }
 
+// exports.loginUser = async (req, res) => {
+//   const id = req.body.id;
+//   const password = req.body.password;
+//   const LoginSql = "SELECT * FROM USER WHERE id = ?;";
+
+//   connection.query(LoginSql, [id], async (err, result) => {
+//     if (err) {
+//       console.log(err);
+//       res.json({ status: false, message: "로그인에 실패했습니다." });
+//     } else {
+//       if (result.length > 0) {
+//         const user = result[0];
+//         const match = await bcrypt.compare(password, user.pw);
+//         if (!match) {
+//           res.status(403).json("Not Authorized");
+//         } else {
+//           try {
+//             // access Token 발급
+//             const accessToken = jwt.sign({
+//               id: user.id,
+//               username: user.name,
+//               phoneNumber: user.phone_number,
+//             }, process.env.ACCESS_SECRET, {
+//               expiresIn: '60m',
+//               issuer: 'About Tech',
+//             });
+
+//             // refresh Token 발급
+//             const refreshToken = jwt.sign({
+//               id: user.id,
+//               username: user.name,
+//               phoneNumber: user.phone_number,
+//             }, process.env.REFRECH_SECRET, {
+//               expiresIn: '24h',
+//               issuer: 'About Tech',
+//             })
+
+//             // token 전송
+//             res.cookie("accessToken", accessToken, {
+//               secure: false,
+//               httpOnly: true,
+//             })
+
+//             res.cookie("refreshToken", refreshToken, {
+//               secure: false,
+//               httpOnly: true,
+//             })
+
+//             const { name, ...others} = user;
+//             console.log(name)
+
+//             res.json({ status: true, name });
+
+//           } catch (error) {
+//             res.status(500).json(error);
+//           }
+//         }
+//       };
+//     }
+//   });
+// };
 exports.loginUser = async (req, res) => {
   const id = req.body.id;
   const password = req.body.password;
@@ -47,7 +110,6 @@ exports.loginUser = async (req, res) => {
           res.status(403).json("Not Authorized");
         } else {
           try {
-            // access Token 발급
             const accessToken = jwt.sign({
               id: user.id,
               username: user.name,
@@ -57,7 +119,6 @@ exports.loginUser = async (req, res) => {
               issuer: 'About Tech',
             });
 
-            // refresh Token 발급
             const refreshToken = jwt.sign({
               id: user.id,
               username: user.name,
@@ -65,21 +126,23 @@ exports.loginUser = async (req, res) => {
             }, process.env.REFRECH_SECRET, {
               expiresIn: '24h',
               issuer: 'About Tech',
-            })
+            });
 
-            // token 전송
             res.cookie("accessToken", accessToken, {
               secure: false,
               httpOnly: true,
-            })
+            });
 
             res.cookie("refreshToken", refreshToken, {
               secure: false,
               httpOnly: true,
-            })
+            });
 
-            const { name, ...others} = user;
-            console.log(name)
+            const { name, ...others } = user;
+            console.log(name);
+
+            // Emit the login result using the socket.io instance
+            socketIO.getIO().emit('loginResult', { status: true, name });
 
             res.json({ status: true, name });
 
