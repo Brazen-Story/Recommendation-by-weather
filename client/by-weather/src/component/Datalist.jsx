@@ -1,34 +1,35 @@
 import React, { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import AdTable from "../component/AdTable";
+import ManagerTable from "./managerInfo/managerTable"
+import ManagerChart from "./managerInfo/managerChart"
 
-function Adlist() {
+function Datalist() {
 
-    const [AdData, setAdData] = useState([]);
-    const [findTemp, setFindTemp] = useState('');
+    const [Reportdata, setReportData] = useState([]);
+    const [findTemp, setFindTemp] = useState(''); // 검색어
     const [showDiv, setShowDiv] = useState(false);
 
-    const getAdData = async () => {
+    const getReportData = async () => {
         try {
-            const response = await axios.get(`http://localhost:4001/ad/manager`);
-            setAdData(response.data);
-            setShowDiv(false);
+            const response = await axios.get(`http://52.78.164.171:3001/report/manager`);
+            setReportData(response.data);
+            setShowDiv(false)
         } catch (error) {
             console.log(error);
         }
     };
 
     useEffect(() => {
-        getAdData();
+        getReportData();
     }, []);
 
     const findData = () => {
         if (findTemp === '') {
             setShowDiv(false);
         } else {
-            const filteredData = AdData.filter(item => item.Ad_ID === findTemp);
-            setAdData(filteredData);
+            const filteredData = Reportdata.filter(item => item.temperature === parseInt(findTemp));
+            setReportData(filteredData);
             setShowDiv(true);
         }
     };
@@ -39,23 +40,25 @@ function Adlist() {
                 <input
                     className="manager_userlist_search"
                     type="text"
-                    placeholder="닉네임"
+                    placeholder="기온"
                     name="temp"
                     value={findTemp}
                     onChange={(e) => setFindTemp(e.target.value)}
                 />
                 <button className="manager_search_btn" onClick={() => findData()}></button>
-                <button className="manager_refresh_btn" onClick={() => getAdData()}></button>
+                <button className="manager_refresh_btn" onClick={() => getReportData()}></button>
             </div>
-            <br />
             <div className={`manager-wrapper${showDiv ? ' show-chart' : ''}`}>
-                <div>
-                    <AdTable manager={AdData} />
+                <div className="manager-table">
+                    <ManagerTable manager={Reportdata} />
+                </div>
+                <div className="manager-chart">
+                    {showDiv && <ManagerChart manager={Reportdata} />}
                 </div>
             </div>
         </>
     );
 }
 
-export default Adlist;
+export default Datalist;
 

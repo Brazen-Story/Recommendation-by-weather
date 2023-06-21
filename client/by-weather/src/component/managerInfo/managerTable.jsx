@@ -1,6 +1,6 @@
 import React from "react";
 import "react-toastify/dist/ReactToastify.css";
-import "../css/manager.css"
+import "../../css/manager.css"
 
 function managerTable(props) {
   return (

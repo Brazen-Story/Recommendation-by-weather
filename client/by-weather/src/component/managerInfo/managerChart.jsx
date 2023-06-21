@@ -1,8 +1,7 @@
 import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import "../css/managerChart.css"
-
+import "../../css/managerChart.css"
 
 function managerChart(props) {
 

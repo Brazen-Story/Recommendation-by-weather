@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "moment/locale/ko";
 import option from "./json/clothes.json";
-import "./css/DataUpdatePage.css"
+import "../css/DataUpdatePage.css"
 
 
 function DataUpdatePage() {
@@ -30,7 +30,7 @@ function DataUpdatePage() {
         selected: selected,
         explanation: explanation,
       };
-      await axios.put(`http://localhost:3001/report/update/${name}/${temperature}/${wind}`, data);
+      await axios.put(`http://52.78.164.171:3001/report/update/${name}/${temperature}/${wind}`, data);
       navigate('/');
     } catch (error) {
       console.error(error);

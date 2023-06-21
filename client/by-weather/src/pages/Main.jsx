@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
 import "moment/locale/ko";
-import MainLeftSidebar from "./MainInfo/MainLeftSidebar";
-import MainContent from "./MainInfo/MainContent";
-import MainRightSidebar from "./MainInfo/mainRightSidebar";
-import "./css/main.css"
+import MainLeftSidebar from "../component/MainInfo/MainLeftSidebar";
+import MainContent from "../component/MainInfo/MainContent";
+import MainRightSidebar from "../component/MainInfo/mainRightSidebar";
+import "../css/main.css"
 import axios from "axios";
 import { useInterval } from 'usehooks-ts'
 
@@ -83,7 +83,7 @@ function Main(props) {
 
   const refreshToken = () => {
     axios({
-      url: "http://localhost:3001/user/Reissuance",
+      url: "http://52.78.164.171:3001/user/Reissuance",
       method: "GET",
       withCredentials: true,
     });

@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
-import "./css/manager.css";
-import Userlist from "./Userlist";
-import Datalist from "./Datalist";
-import Adlist from "./managerInfo/Adlist";
+import "../css/manager.css";
+import Userlist from "../component/Userlist";
+import Datalist from "../component/Datalist";
+import Adlist from "../component/Adlist";
 
 function Manager() {
 

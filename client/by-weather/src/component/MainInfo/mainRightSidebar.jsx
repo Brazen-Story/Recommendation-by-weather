@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import "moment/locale/ko";
 import axios from "axios";
-import '../css/mainRightSidebar.css';
-import clothesData from '../json/clothes.json';
+import '../../css/mainRightSidebar.css';
+import clothesData from '../../json/clothes.json';
 
 function MainRightSidebar(props) {
 
@@ -14,7 +14,7 @@ function MainRightSidebar(props) {
 
     const getData = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/report/manager`);
+            const response = await axios.get(`http://52.78.164.171:3001/report/manager`);
             setData(response.data);
         } catch (error) {
             console.log(error);
