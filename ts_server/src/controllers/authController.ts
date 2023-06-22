@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { connection } from '../db/config';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { MysqlError } from 'mysql';
+import mysql from 'mysql';
 
 const saltRounds = 10; // salt의 자릿수
 
@@ -26,7 +26,7 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
       const InsertUserSql = "INSERT INTO user (id, pw, name, phone_number) VALUES (?,?,?,?);";
       const CreateUser = [id, hashedPassword, username, phoneNumber];
 
-      connection.query(InsertUserSql, CreateUser, (err: MysqlError | null) => {
+      connection.query(InsertUserSql, CreateUser, (err: mysql.MysqlError | null) => {
         if (err) {
           console.log(err);
         } else {
@@ -42,7 +42,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     const { id, password } = req.body;
     const loginSql = 'SELECT * FROM `USER` WHERE id = ?';
 
-    connection.query(loginSql, [id], async (err: MysqlError | null, result: User[]) => {
+    connection.query(loginSql, [id], async (err: mysql.MysqlError | null, result: User[]) => {
       if (err) {
         console.error(err);
         res.status(500).json({ status: false, message: '로그인에 실패했습니다.' });
@@ -116,7 +116,7 @@ export const loginSuccess = (req: Request, res: Response): void => {
 
   const query = "select name from USER where id = ?";
 
-  connection.query(query, [data.id], (err: MysqlError | null, results: String) => {
+  connection.query(query, [data.id], (err: mysql.MysqlError | null, results: String) => {
     try {
       if (err) {
         console.log(err);
@@ -160,7 +160,7 @@ export const loginKeep = (req: Request, res: Response): void => {
 
     const query = "select * from USER where id = ?";
 
-    connection.query(query, [data.id], (err: MysqlError | null) => {
+    connection.query(query, [data.id], (err: mysql.MysqlError | null) => {
       try {
         if (err) {
           console.log(err);

@@ -1,13 +1,13 @@
 import express from 'express';
 import mysql from 'mysql';
 import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
+import cookieParser, { CookieParseOptions } from 'cookie-parser';
 
 dotenv.config();
 
 const app = express();
 
-app.use(cookieParser());
+app.use(cookieParser() as express.RequestHandler); // Specify type as express.RequestHandler
 
 const connection = mysql.createConnection({
   host: 'localhost',
