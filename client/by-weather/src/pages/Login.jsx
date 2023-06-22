@@ -34,7 +34,7 @@ function Login() {
     const { password, id, phoneNumber } = values;
 
     const { data } = await axios({
-      url:"http://52.78.164.171:3001/user/login", 
+      url:"http://localhost:3001/user/login", 
       method: "POST",
       withCredentials: true,
       data: {

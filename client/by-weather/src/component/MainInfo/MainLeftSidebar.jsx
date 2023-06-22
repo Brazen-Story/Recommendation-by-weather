@@ -47,7 +47,7 @@ function MainLeftSidebar(props) {
   }
 
   const submit = async () => {
-    axios.post('http://52.78.164.171:3001/report/submit', byWeather)
+    axios.post('http://localhost:3001/report/submit', byWeather)
       .then(response => {
         if (response.status === 200) {
           return response.data;
@@ -69,7 +69,7 @@ function MainLeftSidebar(props) {
 
   const getData = async () => {
     try {
-      const response = await axios.get(`http://52.78.164.171:3001/report/data/${name}`)
+      const response = await axios.get(`http://localhost:3001/report/data/${name}`)
       setMainData(response.data);
       //console.log(response)
 
@@ -93,7 +93,7 @@ function MainLeftSidebar(props) {
 
   const logout = () => {
     axios({
-      url: "http://52.78.164.171:3001/user/logout",
+      url: "http://localhost:3001/user/logout",
       method: "POST",
       withCredentials: true,
     }).then((result) => {

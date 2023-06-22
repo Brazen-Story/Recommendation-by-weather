@@ -32,7 +32,7 @@ function Register() {
       phoneNumber: phoneNumber,
     })
 
-    axios.post("http://52.78.164.171:3001/user/create", {
+    axios.post("http://localhost:3001/user/create", {
       username: username,
       id: id,
       password: password,

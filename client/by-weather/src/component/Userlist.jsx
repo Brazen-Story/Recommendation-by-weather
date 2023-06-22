@@ -10,7 +10,7 @@ function Userlist() {
 
   const getUserData = async () => {
     try {
-      const response = await axios.get(`http://52.78.164.171:3001/user/user/manager`);
+      const response = await axios.get(`http://localhost:3001/user/user/manager`);
       setUserData(response.data);
     } catch (error) {
       console.log(error);

@@ -14,7 +14,7 @@ function MainRightSidebar(props) {
 
     const getData = async () => {
         try {
-            const response = await axios.get(`http://52.78.164.171:3001/report/manager`);
+            const response = await axios.get(`http://localhost:3001/report/manager`);
             setData(response.data);
         } catch (error) {
             console.log(error);
