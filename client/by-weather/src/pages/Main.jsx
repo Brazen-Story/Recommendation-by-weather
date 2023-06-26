@@ -8,13 +8,13 @@ import MainRightSidebar from "../component/MainInfo/mainRightSidebar";
 import "../css/main.css"
 import axios from "axios";
 import { useInterval } from 'usehooks-ts'
+import { maintainLogged } from "../utils/UserRoutes";
 
 function Main(props) {
 
   const [coords, saveCoords] = useState();
   const [weatherData, setWeatherData] = useState({});
   const [isPlaying, setPlaying] = useState(false)
-  const [User, setUser] = useState();
 
   const navigate = useNavigate();
 
@@ -38,10 +38,8 @@ function Main(props) {
     navigator.geolocation.getCurrentPosition(handleGeoSucc, handleGeoErr);
   }
 
-  const apiKey = "eea57b4d7d7a5c1ab4332cfc01e9a7d1"
-
   function getWeather(lat, lon) {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}`)
       .then(res => res.json())
       .then(data => {
         if (data.rain && data.rain['1h']) {
@@ -83,7 +81,7 @@ function Main(props) {
 
   const refreshToken = () => {
     axios({
-      url: "http://localhost:3001/user/Reissuance",
+      url: maintainLogged,
       method: "GET",
       withCredentials: true,
     });

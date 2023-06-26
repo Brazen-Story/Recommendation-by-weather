@@ -3,6 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import ManagerTable from "./managerInfo/managerTable"
 import ManagerChart from "./managerInfo/managerChart"
+import { managerPage } from "../utils/ReportRoutes";
 
 function Datalist() {
 
@@ -12,7 +13,7 @@ function Datalist() {
 
     const getReportData = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/report/manager`);
+            const response = await axios.get(`${managerPage}`);
             setReportData(response.data);
             setShowDiv(false)
         } catch (error) {

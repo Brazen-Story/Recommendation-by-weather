@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import AdTable from "../component/AdTable";
-
+import { getData } from "../utils/AdRoutes";
 function Adlist() {
 
     const [AdData, setAdData] = useState([]);
@@ -11,7 +11,7 @@ function Adlist() {
 
     const getAdData = async () => {
         try {
-            const response = await axios.get(`http://localhost:4001/ad/manager`);
+            const response = await axios.get(getData);
             setAdData(response.data);
             setShowDiv(false);
         } catch (error) {

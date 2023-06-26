@@ -4,6 +4,7 @@ import {  useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { srvlogin } from "../utils/UserRoutes";
 
 function Login() {
 
@@ -34,7 +35,7 @@ function Login() {
     const { password, id, phoneNumber } = values;
 
     const { data } = await axios({
-      url:"http://localhost:3001/user/login", 
+      url: srvlogin, 
       method: "POST",
       withCredentials: true,
       data: {
@@ -44,7 +45,7 @@ function Login() {
       }
     })
 
-    if (data.status === false) {
+    if (data.status === 403) {
       console.log("err")
     }
 
@@ -61,7 +62,7 @@ function Login() {
 
   return (
     <>
-      <FormContainer>
+      <FormContainer className="FormContainer">
         <form onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
             <h1>Sgin In</h1>

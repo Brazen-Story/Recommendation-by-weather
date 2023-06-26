@@ -8,6 +8,8 @@ import moment from "moment";
 import option from "../../json/clothes.json";
 import '../../css/mainSidebar.css';
 import save from "../../image/submit.png";
+import { srvlogout } from "../../utils/UserRoutes";
+import { getReportsByName, savetReport } from "../../utils/ReportRoutes";
 
 function MainLeftSidebar(props) {
 
@@ -47,7 +49,7 @@ function MainLeftSidebar(props) {
   }
 
   const submit = async () => {
-    axios.post('http://localhost:3001/report/submit', byWeather)
+    axios.post(`${savetReport}`, byWeather)
       .then(response => {
         if (response.status === 200) {
           return response.data;
@@ -69,7 +71,7 @@ function MainLeftSidebar(props) {
 
   const getData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/report/data/${name}`)
+      const response = await axios.get(`${getReportsByName}/${name}`)
       setMainData(response.data);
       //console.log(response)
 
@@ -93,7 +95,7 @@ function MainLeftSidebar(props) {
 
   const logout = () => {
     axios({
-      url: "http://localhost:3001/user/logout",
+      url: srvlogout,
       method: "POST",
       withCredentials: true,
     }).then((result) => {

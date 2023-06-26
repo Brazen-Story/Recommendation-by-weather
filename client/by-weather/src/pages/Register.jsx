@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { sign } from "../utils/UserRoutes";
 
 function Register() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ function Register() {
       phoneNumber: phoneNumber,
     })
 
-    axios.post("http://localhost:3001/user/create", {
+    axios.post(sign, {
       username: username,
       id: id,
       password: password,

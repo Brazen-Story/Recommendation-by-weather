@@ -12,9 +12,9 @@ interface information{
 export const getData = (req: Request, res: Response): void => {
   const category = req.params.category;
 
-  const sql = 'SELECT * FROM ad_information_tb WHERE AD_ID = ?;';
+  const query = 'SELECT * FROM ad_information_tb WHERE AD_ID = ?;';
 
-  connection.query(sql, [category], (err: MysqlError | null, result: information) => {
+  connection.query(query, [category], (err: MysqlError | null, result: information) => {
     if (err) {
       console.log(err);
     } else {
@@ -24,10 +24,13 @@ export const getData = (req: Request, res: Response): void => {
 };
 
 export const counting = (req: Request, res: Response): void => {
+  
   const advertisingId = req.body.advertisingId;
 
-  const maxCountQuery = 'SELECT MAX(Ad_Click_Count) AS MaxCount FROM ad_click_tb';
-  connection.query(maxCountQuery, (error: MysqlError | null, results: any) => {
+  console.log(advertisingId)
+
+  const query = 'SELECT MAX(Ad_Click_Count) AS MaxCount FROM ad_click_tb';
+  connection.query(query, (error: MysqlError | null, results: any) => {
     if (error) {
       console.error(error);
       res.status(500).json({ message: 'Error retrieving max Ad_Click_Count from ad_click_tb' });
@@ -55,8 +58,8 @@ export const counting = (req: Request, res: Response): void => {
 export const exposed = (req: Request, res: Response): void => {
   const advertisingId = req.body.advertisingId;
 
-  const maxCountQuery = 'SELECT MAX(Impression_Count) AS MaxCount FROM ad_impression_tb';
-  connection.query(maxCountQuery, (error: MysqlError | null, results: any) => {
+  const query = 'SELECT MAX(Impression_Count) AS MaxCount FROM ad_impression_tb';
+  connection.query(query, (error: MysqlError | null, results: any) => {
     if (error) {
       console.error(error);
       res.status(500).json({ message: 'Error retrieving max Ad_Click_Count from ad_click_tb' });
@@ -81,8 +84,8 @@ export const exposed = (req: Request, res: Response): void => {
   });
 };
 
-export const adlist = (req: Request, res: Response): void => {
-  const sql = `
+export const advertisingList = (req: Request, res: Response): void => {
+  const query = `
     SELECT
       ac.Ad_ID,
       ac.Ad_Click_Count,
@@ -115,7 +118,7 @@ export const adlist = (req: Request, res: Response): void => {
     Click_Time DESC;
 `;
 
-connection.query(sql, (error: MysqlError | null, results: any) => {
+connection.query(query, (error: MysqlError | null, results: any) => {
   if (error) {
     console.error(error);
     res.status(500).json({ message: 'Error' });

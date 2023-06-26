@@ -1,19 +1,19 @@
 import { Router } from 'express';
 
 import {
-  createUser,
-  loginUser,
-  loginSuccess,
-  loginKeep,
-  logoutUser,
-  ManagerUserList,
+  sign,
+  login,
+  loginSuccessfully,
+  logout,
+  managerUserList,
+  maintainLogged,
 } from '../controllers/authController';
 
 export const userRoutes: Router = Router();
 
-userRoutes.post('/create', createUser);
-userRoutes.post('/login', loginUser);
-userRoutes.get('/success', loginSuccess);
-userRoutes.get('/Reissuance', loginKeep);
-userRoutes.post('/logout', logoutUser);
-userRoutes.get('/user/manager', ManagerUserList);
+userRoutes.post('/create', sign);
+userRoutes.post('/login', login);
+userRoutes.get('/success', loginSuccessfully);
+userRoutes.get('/Reissuance', maintainLogged);
+userRoutes.post('/logout', logout);
+userRoutes.get('/user/manager', managerUserList);

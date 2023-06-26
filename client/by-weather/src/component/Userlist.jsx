@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "../css/Userlist.css"
+import { managerUserList } from "../utils/UserRoutes";
 
 function Userlist() {
 
@@ -10,7 +11,7 @@ function Userlist() {
 
   const getUserData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/user/user/manager`);
+      const response = await axios.get(managerUserList);
       setUserData(response.data);
     } catch (error) {
       console.log(error);

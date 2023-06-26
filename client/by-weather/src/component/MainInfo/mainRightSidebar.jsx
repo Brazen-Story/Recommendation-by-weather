@@ -4,6 +4,9 @@ import "moment/locale/ko";
 import axios from "axios";
 import '../../css/mainRightSidebar.css';
 import clothesData from '../../json/clothes.json';
+import {counting, advertisingList, exposed} from "../../utils/AdRoutes";
+import { managerPage } from "../../utils/ReportRoutes";
+
 
 function MainRightSidebar(props) {
 
@@ -14,7 +17,7 @@ function MainRightSidebar(props) {
 
     const getData = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/report/manager`);
+            const response = await axios.get(`${managerPage}`);
             setData(response.data);
         } catch (error) {
             console.log(error);
@@ -24,6 +27,11 @@ function MainRightSidebar(props) {
     useEffect(() => {
         getData();
     }, []);
+
+    console.log(counting)
+    console.log(advertisingList)
+    console.log(exposed)
+
 
     const [category, setCategory] = useState('');
 
@@ -52,10 +60,12 @@ function MainRightSidebar(props) {
         findCategory();
     }, [fashionName]);
 
+    console.log(advertisingList)
+
     useEffect(() => {
         if (category) {
             const getAD = async () => {
-                const response = await axios.get(`http://localhost:4001/ad/data/${category}`);
+                const response = await axios.get(`${advertisingList}/${category}`);
                 setAD(response.data);
             };
             getAD();
@@ -85,7 +95,7 @@ function MainRightSidebar(props) {
         setCount(count + 1); // 카운트를 1씩 증가시킴
 
         try {
-            const response = await axios.post("http://localhost:4001/ad/count", { advertisingId });
+            const response = await axios.post(counting, {advertisingId});
             if (response.status === 200) {
                 window.open(Advertising.link, '_blank')
             } else {
@@ -112,9 +122,10 @@ function MainRightSidebar(props) {
     const sendRequest = async () => {
         try {
             console.log(advertisingId)
-            const response = await axios.post("http://localhost:4001/ad/request", { advertisingId });
+            const response = await axios.post(exposed, {advertisingId});
             console.log(response.data);
         } catch (error) {
+            console.log("마사카")
             console.error(error);
         }
     };

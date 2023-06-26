@@ -7,6 +7,7 @@ import "moment/locale/ko";
 import "../../css/mainContent.css"
 import edit from "../../image/edit.png";
 import del from "../../image/delete.png";
+import { deleteReport, getReportsByName, findtemp } from "../../utils/ReportRoutes";
 
 function MainContent(props) {
 
@@ -21,8 +22,8 @@ function MainContent(props) {
 
     const deleteItem = async (temperature, name, date) => {
 
-        await axios.delete(`http://localhost:3001/report/deleteItem/${name}/${temperature}/${date}`);
-        const response = await axios.get(`http://localhost:3001/report/data/${name}`);
+        await axios.delete(`${deleteReport}/${name}/${temperature}/${date}`);
+        const response = await axios.get(`${getReportsByName}/${name}`);
         setMainData(response.data);
 
     }
@@ -42,7 +43,7 @@ function MainContent(props) {
 
     const findData = async () => { //없는 데이터를 찾으려고 하는 경우 알려줘야함.
         try {
-            const response = await axios.get(`http://localhost:3001/report/data/${name}/${findTemp}`)
+            const response = await axios.get(`${findtemp}/${name}/${findTemp}`)
             setMainData(response.data);
         } catch (error) {
             console.log("데이터 수집 버튼 오류")
@@ -51,7 +52,7 @@ function MainContent(props) {
 
     const getData = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/report/data/${name}`)
+            const response = await axios.get(`${getReportsByName}/${name}`)
             setMainData(response.data);
         } catch (error) {
             console.log("데이터 수집 오류");
