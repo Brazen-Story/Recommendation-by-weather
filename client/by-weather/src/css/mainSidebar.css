@@ -137,12 +137,19 @@
 
   #menubtn1{
     position: absolute;
-    top: 83%;
+    top: 78%;
+
 }
 
   #menubtn2{
     position: absolute;
     top: 88%;
+  }
+
+  #menubtn3{
+    position: absolute;
+    top: 83%;
+
   }
 
   #save_btn{

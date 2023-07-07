@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Main from "./pages/Main";
 import DataUpdatePage from "./pages/DataUpdatePage";
 import Manager from "./pages/Manager";
+import Weather from "./pages/Weather";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/" element={<Main />} />
         <Route exact path="/DataUpdatePage" element={<DataUpdatePage />} />
+        <Route exact path="/weather" element={<Weather />} />
       </Routes>
     </BrowserRouter>
   );

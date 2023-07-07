@@ -114,6 +114,10 @@ function MainLeftSidebar(props) {
 
   const [showDiv, setShowDiv] = useState(false);
 
+  const goWeather = () => {
+    navigate('/weather')
+  };
+
   return (
     <>
       <FormContainer>
@@ -163,6 +167,7 @@ function MainLeftSidebar(props) {
             <div className="container">
               {showAdminButton && showDiv && <button className="btn" id="menubtn1" onClick={() => Manager()}>웹 관리</button>}
               {showDiv && <button className="btn" id="menubtn2" onClick={() => logout()}>로그아웃</button>}
+              {showDiv && <button className="btn" id="menubtn3" onClick={() => goWeather()}>날씨</button>}
             </div>
             <button className="image-button" onClick={() => setShowDiv(!showDiv)}></button>
           </div>
