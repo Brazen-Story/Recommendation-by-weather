@@ -120,3 +120,29 @@ export const findtemp = async (req: Request, res: Response) => {
     }
   });
 };
+
+export const changedLocationName = async (req: Request, res: Response) => {
+  const name = req.body.place;
+  const query = "SELECT Korean from region_name WHERE English = ?;";
+
+  connection.query(query, name, (err: MysqlError | null, result: Report[]) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(result);
+    }
+  });
+};
+
+export const changedWeatherName =async(req: Request, res: Response) => {
+  const name = req.body.weather;
+  const query = "SELECT Korean from region_weather WHERE English = ?;";
+
+  connection.query(query, name, (err: MysqlError | null, result: Report[]) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(result);
+    }
+  });
+};

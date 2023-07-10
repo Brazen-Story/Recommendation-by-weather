@@ -7,6 +7,8 @@ import { reportRoutes } from './routes/reportRoutes';
 import dotenv from 'dotenv';
 import http from 'http';
 import { connection } from './db/config';
+import request from 'request';
+import { weatherRoutes } from './routes/weatherRoutes';
 
 dotenv.config();
 
@@ -24,6 +26,7 @@ app.use(
 
 const user = 'SELECT * FROM USER';
 const report = 'SELECT * FROM REPORT';
+const regionName = 'SELECT * FROM region_name';
 
 connection.query(user, function (error: Error, userResults: string) {
   if (error) throw error;
@@ -35,8 +38,16 @@ connection.query(report, function (error: Error, reportResults: string) {
   console.log('good Report');
 });
 
+connection.query(regionName, function (error: Error, reportResults: string) {
+  if (error) throw error;
+  console.log('good regionName');
+});
+
+
+
 app.use('/user', userRoutes);
 app.use('/report', reportRoutes);
+app.use('/weather', weatherRoutes);
 
 const server = http.createServer(app);
 

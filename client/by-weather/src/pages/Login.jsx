@@ -65,7 +65,7 @@ function Login() {
       <FormContainer className="FormContainer">
         <form onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
-            <h1>Sgin In</h1>
+            <h1>로그인</h1>
           </div>
           <input
             type="text"
@@ -80,9 +80,9 @@ function Login() {
             name="password"
             onChange={(e) => handleChange(e)}
           />
-          <button type="submit">Login In</button>
+          <button type="submit">로그인</button>
           <span>
-            Don't have an account? <a onClick={() => goResi()}>Register</a>
+            회원이 아니신가요? <a onClick={() => goResi()}>회원가입</a>
           </span>
           <br />
         </form>

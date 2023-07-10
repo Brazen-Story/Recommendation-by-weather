@@ -4,5 +4,4 @@ export const maintainLogged = `${process.env.REACT_APP_rprsnSrvr}/user/Reissuanc
 export const srvlogout = `${process.env.REACT_APP_rprsnSrvr}/user/logout` 
 export const managerUserList = `${process.env.REACT_APP_rprsnSrvr}/user/user/manager`
 
-
 export const loginSuccessfully = `${process.env.REACT_APP_rprsnSrvr}/user/success`

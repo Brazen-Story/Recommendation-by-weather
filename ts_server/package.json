@@ -17,6 +17,8 @@
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.3",
     "@types/jsonwebtoken": "^9.0.2",
+    "@types/request": "^2.48.8",
+    "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -24,6 +26,7 @@
     "express": "^4.18.2",
     "http": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "request": "^2.88.2"
   }
 }

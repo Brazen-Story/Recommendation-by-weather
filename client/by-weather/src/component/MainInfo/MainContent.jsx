@@ -7,7 +7,7 @@ import "moment/locale/ko";
 import "../../css/mainContent.css"
 import edit from "../../image/edit.png";
 import del from "../../image/delete.png";
-import { deleteReport, getReportsByName, findtemp } from "../../utils/ReportRoutes";
+import { deleteReport, getReportsByName, findtemp, changedName, weatherChangedName } from "../../utils/ReportRoutes";
 
 function MainContent(props) {
 
@@ -15,6 +15,8 @@ function MainContent(props) {
     const [mainData, setMainData] = useState([]);
     const [moveData, setMoveData] = useState([0, 0]);
     const [findTemp, setFindTemp] = useState("");
+    const [locationKoreanName, setLocationKoreanName] = useState("");
+    const [WeatherKoreanName, setWeatherKoreanName] = useState("");
 
     const navigate = useNavigate();
 
@@ -27,19 +29,6 @@ function MainContent(props) {
         setMainData(response.data);
 
     }
-
-    function handleCheckboxChange(event) {
-        const checkboxValue = event.target.value;
-        if (event.target.checked) {
-            setSelected([...selected, checkboxValue]);
-        } else {
-            setSelected(selected.filter(value => value !== checkboxValue));
-        }
-    }
-
-    useEffect(() => {
-        getData();
-    }, [name]);
 
     const findData = async () => { //없는 데이터를 찾으려고 하는 경우 알려줘야함.
         try {
@@ -59,14 +48,60 @@ function MainContent(props) {
         }
     };
 
+    const dataMove = (item) => { //수정
+        setMoveData([item]);
+    }
+
+    const changeLocationName = async () => {
+
+        const response = await axios({
+            url: changedName,
+            method: "POST",
+            withCredentials: true,
+            data: {
+                place: props.main.place,
+            }
+        })
+
+        setLocationKoreanName(response.data[0].Korean)
+    }
+
+    const changeWeatherName = async () => {
+
+        const response = await axios({
+            url: weatherChangedName,
+            method: "POST",
+            withCredentials: true,
+            data: {
+                weather: props.main.weather
+            }
+        })
+
+        setWeatherKoreanName(response.data[0].Korean)
+    }
+
+
     useEffect(() => {
         if (moveData[0] !== 0) {
             navigate("/DataUpdatePage", { state: { dataArray: moveData } });
         }
     }, [moveData, navigate]);
 
-    const dataMove = (a) => { //수정
-        setMoveData([a]);
+    useEffect(() => {
+        getData();
+        if (props.main.place && props.main.weather) {
+            changeLocationName();
+            changeWeatherName();
+        }
+    }, [name, props.main.place, props.main.weather]);
+
+    function handleCheckboxChange(event) {
+        const checkboxValue = event.target.value;
+        if (event.target.checked) {
+            setSelected([...selected, checkboxValue]);
+        } else {
+            setSelected(selected.filter(value => value !== checkboxValue));
+        }
     }
 
     return ( //순서
@@ -75,11 +110,11 @@ function MainContent(props) {
                 <div className="All">
                     <div className="title">
                         <p className="weatherData">
-                            {props.main.place}{" : "}
+                            {locationKoreanName}{" : "}
                             기온 : {props.main.temp}°C{" | "}
                             체감 : {props.main.feelsLike}°C{" | "}
                             {props.main.rain === undefined ? null : "강수량 : " + props.main.rain + " | "}
-                            {props.main.weather}{" | "}
+                            {WeatherKoreanName}{" | "}
                             {props.main.wind}m/s
                         </p>
                         <img src={`http://openweathermap.org/img/wn/${props.main.icon}@2x.png`} alt="weather icon" className="icon"></img>

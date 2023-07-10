@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getReportsByName, deleteReport, updateReport, managerPage, findtemp, saveReport  } from '../controllers/reportController';
+import { getReportsByName, deleteReport, updateReport, managerPage, findtemp, saveReport, changedLocationName, changedWeatherName  } from '../controllers/reportController';
 
 export const reportRoutes: Router = Router();
 
@@ -9,4 +9,5 @@ reportRoutes.delete('/deleteItem/:name/:temperature/:date', deleteReport);
 reportRoutes.put('/update/:name/:temperature/:wind', updateReport);
 reportRoutes.get('/manager', managerPage);
 reportRoutes.get('/data/:name/:findTemp', findtemp);
-
+reportRoutes.post('/local', changedLocationName);
+reportRoutes.post('/weather', changedWeatherName);

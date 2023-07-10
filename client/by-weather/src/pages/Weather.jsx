@@ -1,15 +1,24 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { villageWeathers } from "../utils/WeatherRoutes";
+import RadarImage from "../component/RadarImage";
+import SpecialWeather from "../component/SpecialWeather";
+
 function Weather() {
+  //미세먼지
+  //날씨
+  //날씨 관련 뉴스
 
 
-    return(
-        <>
-        </>
-    )
+  return (
+    <>
+      <RadarImage />
+      <SpecialWeather />
+    </>
+  )
 
 }
 
 export default Weather;
 
-https://yogiweather.netlify.app/
-https://www.data.go.kr/tcs/puc/selectPublicUseCaseView.do?prcuseCaseSn=1035322
-https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15056924

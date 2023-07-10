@@ -46,7 +46,7 @@ function Register() {
       <FormContainer>
         <form onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
-            <h1>Register</h1>
+            <h1>회원가입</h1>
           </div>
           <input
             type="text"
@@ -72,9 +72,9 @@ function Register() {
             name="phoneNumber"
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
-          <button type="submit">Create User</button>
+          <button type="submit">회원가입</button>
           <span>
-            Already have an account ? <Link to="/login">Login</Link>
+            이미 회원이신가요? <Link to="/login">로그인</Link>
           </span>
         </form>
       </FormContainer>

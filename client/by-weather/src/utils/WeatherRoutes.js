@@ -1,0 +1,1 @@
+export const villageWeathers = `${process.env.REACT_APP_rprsnSrvr}/weather`
