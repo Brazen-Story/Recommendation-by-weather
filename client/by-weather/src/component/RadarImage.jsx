@@ -32,6 +32,7 @@ const RadarImage = () => {
       {radarImages.length > 0 ? (
         <>
           <span>레이더 영상</span>
+          <br></br>
           <img src={radarImages[currentImageIndex]} alt={`Radar Image ${currentImageIndex}`} />
         </>
       ) : (

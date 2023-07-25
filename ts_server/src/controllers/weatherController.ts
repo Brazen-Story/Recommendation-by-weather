@@ -50,6 +50,7 @@ export const getWthrBrkNews = async (req: Request, res: Response) => {
   .then((response: AxiosResponse<any>) => {
     if (response && response.status) {
       if (response.data.response.body && response.data.response.body.items && response.data.response.body.items.item) {
+        console.log(response.data.response.body.items.item)
         res.json(response.data.response.body.items.item);
       } else {
         console.error('Error: Invalid response structure');

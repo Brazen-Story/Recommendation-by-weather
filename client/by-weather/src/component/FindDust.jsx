@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+//https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15073885
 const FindDust = () => {
 
     const [findDust, setFindDust] = useState([]);

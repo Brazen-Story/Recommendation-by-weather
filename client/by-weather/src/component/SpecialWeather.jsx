@@ -1,6 +1,3 @@
-//https://www.data.go.kr/iim/api/selectAPIAcountView.do
-//압축폴더 있음.
-//활용신청했음
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
 
@@ -17,17 +14,29 @@ const WthrWrnInfo = () => {
         getWthrBrkNews();
     }, [])
 
-    const formatDateTime = (dateTimeStr) => {
-        const dateTime = new Date(dateTimeStr);
-        const year = dateTime.getFullYear();
-        const month = String(dateTime.getMonth() + 1).padStart(2, '0');
-        const day = String(dateTime.getDate()).padStart(2, '0');
-        const hour = String(dateTime.getHours()).padStart(2, '0');
-        const minute = String(dateTime.getMinutes()).padStart(2, '0');
+    // const formatDateTime = (dateTimeStr) => {
+    //     const dateTime = new Date(dateTimeStr);
+    //     const year = dateTime.getFullYear();
+    //     const month = String(dateTime.getMonth() + 1).padStart(2, '0');
+    //     const day = String(dateTime.getDate()).padStart(2, '0');
+    //     const hour = String(dateTime.getHours()).padStart(2, '0');
+    //     const minute = String(dateTime.getMinutes()).padStart(2, '0');
 
+    //     return `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분`;
+    // };
+
+    function formatDateTime(dateTimeStr) {
+        // Convert the number to a string first
+        const str = String(dateTimeStr);
+    
+        const year = str.slice(0, 4);
+        const month = str.slice(4, 6);
+        const day = str.slice(6, 8);
+        const hour = str.slice(8, 10);
+        const minute = str.slice(10, 12);
+    
         return `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분`;
-    };
-
+    }
     const extractTextAfterSlash = (text) => {
         const index = text.indexOf('/');
         if (index !== -1) {

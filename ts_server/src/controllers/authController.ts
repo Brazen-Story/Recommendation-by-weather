@@ -156,7 +156,7 @@ export const managerUserList = async (req: Request, res: Response): Promise<void
 export const maintainLogged = (req: Request, res: Response): void => {
   try {
     const token = req.cookies.refreshToken;
-    
+
     const data = jwt.verify(token, process.env.REFRESH_SECRET!) as User;
 
     const query = "select * from USER where id = ?";
