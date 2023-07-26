@@ -1,19 +1,9 @@
 .radar-images-container {
-    display: flex;
-    overflow: hidden;
-  }
-  
-  .radar-image {
-    width: 100%;
-    height: auto;
-    animation: slide 30s linear infinite;
-  }
-  
-  @keyframes slide {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 3%;
+  width: 800px;
+  height: 640px;
   }

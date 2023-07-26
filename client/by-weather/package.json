@@ -13,8 +13,10 @@
     "dotenv": "^16.0.3",
     "moment": "^2.29.4",
     "react": "^18.2.0",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.1.5",
+    "react-id-swiper": "^4.0.0",
     "react-native": "^0.71.4",
     "react-native-webview": "^11.26.1",
     "react-navigation-hooks": "^1.1.0",
@@ -23,6 +25,7 @@
     "react-toastify": "^9.1.1",
     "recharts": "^2.5.0",
     "styled-components": "^5.3.6",
+    "swiper": "^10.0.4",
     "usehooks-ts": "^2.9.1",
     "web-vitals": "^2.1.4"
   },

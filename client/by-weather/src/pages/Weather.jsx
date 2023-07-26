@@ -11,34 +11,30 @@ function Weather() {
   //미세먼지
   //날씨
   //날씨 관련 뉴스
-  
+
 
   return (
     <>
-
-
-
-
       <div className="wrap">
         <div className="header">
           <div className="header_inner">
-          <h2 className="Htitle" style={{ fontFamily: 'Dancing Script' }}>Fashion Diary</h2>
+            <h2 className="Htitle" style={{ fontFamily: 'Dancing Script' }}>Fashion Diary</h2>
           </div>
         </div>
-
-        <div className="container">
+        <div className="weather_container">
           <div className="root">
             <div className="container_left">
-            <RadarImage />
+            <p className="tab_title">레이더 영상</p>
+              <RadarImage />
             </div>
             <div className="container_right">
               <div>
-              기상 속보
-      <br></br>
-      <SpecialWeather />
-      미세먼지 현황
-      <br></br>
-      <FindDust />
+                <p className="tab_title">기상 속보</p>
+                <br></br>
+                <SpecialWeather />
+                <p className="tab_title">미세먼지 현황</p>
+                <br></br>
+                <FindDust />
               </div>
 
             </div>

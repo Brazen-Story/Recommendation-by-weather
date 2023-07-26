@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import '../css/Radar.css'
 
 const RadarImage = () => {
   const [radarImages, setRadarImages] = useState([]);
@@ -22,18 +23,17 @@ const RadarImage = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % radarImages.length);
-    }, 1000);
-
+    }, 500);
+  
     return () => clearInterval(interval);
-  }, [radarImages.length]);
+  }, [radarImages]); // add radarImages to the dependencies array
+  
 
   return (
     <div className="radar-images-container">
       {radarImages.length > 0 ? (
         <>
-          <span>레이더 영상</span>
-          <br></br>
-          <img src={radarImages[currentImageIndex]} alt={`Radar Image ${currentImageIndex}`} />
+          <img src={radarImages[currentImageIndex]} alt={` 레이더 준비 중`} />
         </>
       ) : (
         <span>Loading...</span>
