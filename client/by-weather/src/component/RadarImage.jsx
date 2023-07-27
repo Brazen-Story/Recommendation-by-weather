@@ -26,8 +26,7 @@ const RadarImage = () => {
     }, 500);
   
     return () => clearInterval(interval);
-  }, [radarImages]); // add radarImages to the dependencies array
-  
+  }, [radarImages]); // add radarImages to the dependencies array  
 
   return (
     <div className="radar-images-container">

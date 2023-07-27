@@ -28,11 +28,6 @@ function MainRightSidebar(props) {
         getData();
     }, []);
 
-    console.log(counting)
-    console.log(advertisingList)
-    console.log(exposed)
-
-
     const [category, setCategory] = useState('');
 
     useEffect(() => {

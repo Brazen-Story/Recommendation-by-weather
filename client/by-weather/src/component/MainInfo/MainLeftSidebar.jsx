@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "moment/locale/ko";
@@ -115,9 +115,9 @@ function MainLeftSidebar(props) {
   const [showDiv, setShowDiv] = useState(false);
 
   const goWeather = () => {
-    navigate('/weather')
+    navigate('/weather', { state: { place: props.main.place } });
   };
-
+  
   return (
     <>
       <FormContainer>
@@ -167,7 +167,10 @@ function MainLeftSidebar(props) {
             <div className="container">
               {showAdminButton && showDiv && <button className="btn" id="menubtn1" onClick={() => Manager()}>웹 관리</button>}
               {showDiv && <button className="btn" id="menubtn2" onClick={() => logout()}>로그아웃</button>}
-              {showDiv && <button className="btn" id="menubtn3" onClick={() => goWeather()}>날씨</button>}
+              {showDiv &&
+
+                  <button className="btn" id="menubtn3" onClick={() => goWeather()}>날씨</button>
+              }
             </div>
             <button className="image-button" onClick={() => setShowDiv(!showDiv)}></button>
           </div>

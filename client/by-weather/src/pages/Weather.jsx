@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import axios from "axios";
 import { villageWeathers } from "../utils/WeatherRoutes";
 import RadarImage from "../component/RadarImage";
 import SpecialWeather from "../component/SpecialWeather";
 import FindDust from "../component/FindDust";
 import '../css/Weather.css'
+import DaylightCycle from "../component/DaylightCycle";
 
-function Weather() {
-  //미세먼지
-  //날씨
-  //날씨 관련 뉴스
+function Weather(props) {
 
+  const location = useLocation();
+  const place = location.state?.place;
 
   return (
     <>
@@ -35,6 +35,9 @@ function Weather() {
                 <p className="tab_title">미세먼지 현황</p>
                 <br></br>
                 <FindDust />
+                <br></br>
+                <p className="tab_title">일출·일몰</p>
+                <DaylightCycle place={place} />
               </div>
 
             </div>

@@ -50,7 +50,6 @@ export const getWthrBrkNews = async (req: Request, res: Response) => {
   .then((response: AxiosResponse<any>) => {
     if (response && response.status) {
       if (response.data.response.body && response.data.response.body.items && response.data.response.body.items.item) {
-        console.log(response.data.response.body.items.item)
         res.json(response.data.response.body.items.item);
       } else {
         console.error('Error: Invalid response structure');
@@ -83,8 +82,35 @@ export const getFindDust =async (req:Request, res: Response) => {
   axios.get(url, { params: queryParams })
   .then((response: AxiosResponse<any>) => {
     const filteredData = response.data.response.body.items.filter(item => item.issueDate === date);
-    console.log(date)
     res.json(filteredData)
+  })
+  .catch(error => {
+    console.error('Error', error);
+    res.status(500).json({ error: 'An error occurred' });
+  });
+
+}
+
+export const getDayLightCycle = async (req:Request, res: Response) => {
+
+  const name = req.body.place;
+
+  console.log(name)
+
+  const date = format(new Date(), 'yyyyMMdd'); // 현재 날짜 (YYYY-MM-DD)
+
+  console.log(date)
+
+  const url = 'http://apis.data.go.kr/B090041/openapi/service/RiseSetInfoService/getAreaRiseSetInfo';
+  const queryParams = new URLSearchParams();
+  queryParams.append('serviceKey', 'LzjZqVyUzjE4coNcVdJSVesXSSL3q5Nqg3Kb+xtu/Wb8XtmZmFUPGKrXpGAUogbAi2r78eGpKUkG9fNfRxBYXg==');
+  queryParams.append('locdate', date);
+  queryParams.append('location', name);
+
+  axios.get(url, { params: queryParams })
+  .then((response: AxiosResponse<any>) => {
+    console.log(response.data.response.body.items.item)
+    res.json(response.data.response.body.items.item)
   })
   .catch(error => {
     console.error('Error', error);
