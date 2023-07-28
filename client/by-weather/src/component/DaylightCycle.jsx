@@ -77,7 +77,7 @@ function DaylightCycle(props) {
             </div>
             <div style={{ textAlign: 'center' }}>
                 <img src={sunsetImage} alt="sunset" style={{ maxWidth: '100px', maxHeight: '100px' }} />
-                <p>{data.sunrise ? formatTime(data.sunrise) : 'Loading...'}</p>
+                <p>{data.sunrise ? formatTime(data.sunset) : 'Loading...'}</p>
             </div>
         </div>
 

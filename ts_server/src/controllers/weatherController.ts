@@ -118,3 +118,27 @@ export const getDayLightCycle = async (req:Request, res: Response) => {
   });
 
 }
+
+export const getYoutubeVideos = async (req: Request, res: Response) => {
+  try {
+    const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+      params: {
+        part: 'snippet',
+        maxResults: 8,
+        q: '날씨',
+        key: process.env.YOUTUBE_API_KEY,  // 여기에 실제 YouTube API 키를 넣어야 합니다.
+      },
+    });
+
+    const videos = response.data.items.map((item: any) => ({
+      title: item.snippet.title,
+      thumbnail: item.snippet.thumbnails.default.url,
+      link: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+    }));
+
+    res.json(videos);
+  } catch (error) {
+    console.error('Error', error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+};
