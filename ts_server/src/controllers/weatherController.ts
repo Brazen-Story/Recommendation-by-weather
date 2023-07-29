@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { Request, Response } from 'express';
 import { format } from 'date-fns';
+import Redis from 'ioredis';
 
 import { connection } from '../db/config';
 import { MysqlError } from 'mysql';
@@ -119,26 +120,46 @@ export const getDayLightCycle = async (req:Request, res: Response) => {
 
 }
 
+
+const redis = new Redis(); // Redis 클라이언트 생성 (설정에 맞게 수정 필요)
+
 export const getYoutubeVideos = async (req: Request, res: Response) => {
-  try {
-    const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
-      params: {
-        part: 'snippet',
-        maxResults: 8,
-        q: '날씨',
-        key: process.env.YOUTUBE_API_KEY,  // 여기에 실제 YouTube API 키를 넣어야 합니다.
-      },
-    });
+  const currentHour = new Date().getHours();
 
-    const videos = response.data.items.map((item: any) => ({
-      title: item.snippet.title,
-      thumbnail: item.snippet.thumbnails.default.url,
-      link: `https://www.youtube.com/watch?v=${item.id.videoId}`,
-    }));
+  if (currentHour === 7 || currentHour === 13 || currentHour === 20 || !(await redis.exists('videos'))) {
+    try {
+      const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+        params: {
+          part: 'snippet',
+          maxResults: 8,
+          q: '날씨',
+          key: process.env.YOUTUBE_API_KEY,
+        },
+      });
 
-    res.json(videos);
-  } catch (error) {
-    console.error('Error', error);
-    res.status(500).json({ error: 'An error occurred' });
+      const videos = response.data.items.map((item: any) => ({
+        title: item.snippet.title,
+        thumbnail: item.snippet.thumbnails.default.url,
+        link: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+      }));
+
+      // 캐시 업데이트 (다음 캐시 갱신까지 유효)
+      await redis.set('videos', JSON.stringify(videos), 'EX', 60 * 60 * 12);  // 6시간 동안 캐시 유효
+
+      res.json(videos);
+    } catch (error) {
+      console.error('Error', error);
+      res.status(500).json({ error: 'An error occurred' });
+    }
+  } else {
+    // 캐시에서 데이터 가져오기
+    const cachedVideosString = await redis.get('videos');
+    if (cachedVideosString) {
+      const cachedVideos = JSON.parse(cachedVideosString);
+      res.json(cachedVideos);
+    } else {
+      res.status(404).json({ error: 'No cached videos found' });
+    }
+    
   }
 };

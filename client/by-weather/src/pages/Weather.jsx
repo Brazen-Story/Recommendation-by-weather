@@ -7,6 +7,7 @@ import SpecialWeather from "../component/SpecialWeather";
 import FindDust from "../component/FindDust";
 import '../css/Weather.css'
 import DaylightCycle from "../component/DaylightCycle";
+import NewsVideio from "../component/NewsVideo";
 
 function Weather(props) {
 
@@ -38,8 +39,9 @@ function Weather(props) {
                 <br></br>
                 <p className="tab_title">일출·일몰</p>
                 <DaylightCycle place={place} />
+                <br></br>
+                <NewsVideio />
               </div>
-
             </div>
           </div>
         </div>
