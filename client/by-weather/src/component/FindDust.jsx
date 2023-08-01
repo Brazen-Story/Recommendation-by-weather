@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-//https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15073885
+import '../css/finddust.css'
 const FindDust = () => {
 
   const [findDust, setFindDust] = useState([]);
@@ -24,11 +24,9 @@ const FindDust = () => {
 
   return (
     <>
-      <div style={{ height: '100px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', backgroundColor: 'white' }}>
+      <div className='dust'>
         {state}
       </div>
-
-
     </>
   )
 }

@@ -43,3 +43,14 @@
     padding-bottom: 78px;
     width: 1280px;
 }
+
+.container_bottom {
+    width: 100%;
+    clear: both;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}

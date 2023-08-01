@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
 import { Scrollbars } from 'react-custom-scrollbars';
-
+import '../css/wthrwrninfo.css'
 const WthrWrnInfo = () => {
 
     const [specialReports, setSpecialReports] = useState([]);
@@ -36,7 +36,7 @@ const WthrWrnInfo = () => {
         <>
             <Scrollbars style={{ height: 120 }}>
                 {specialReports.map((report, index) => (
-                    <div key={index} style={{height: '100px', display: 'flex', flexDirection: 'column', textAlign: 'center', alignItems: 'center', backgroundColor: 'white'}}>
+                    <div key={index} className="info">
                         <p>{extractTextAfterSlash(report.title)}</p>
                         <p>{formatDateTime(report.tmFc)}</p>
                     </div>

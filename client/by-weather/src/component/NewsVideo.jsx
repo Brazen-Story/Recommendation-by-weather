@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Scrollbars } from 'react-custom-scrollbars';
+import '../css/video.css'
 
 function NewsVideio() {
 
@@ -21,16 +23,17 @@ function NewsVideio() {
 
     return (
         <>
-            <div style={{ display: 'flex', flexDirection: 'row', overflowX: 'scroll' }}>
+            <div className="scrollableDiv">
                 {videos.map((video, index) => (
-                    <div key={index} style={{ marginRight: '20px' }}>
+                    <div key={index} className='video'>
                         <a href={video.link} target="_blank" rel="noopener noreferrer">
-                            <img src={video.thumbnail} alt={video.title} />
-                            <p>{video.title}</p>
+                            <img src={video.thumbnail} alt={video.title} className='video-img' />
+                            <p className='video-title'>{video.title}</p>
                         </a>
                     </div>
                 ))}
             </div>
+
         </>
     )
 }

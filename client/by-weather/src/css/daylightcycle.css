@@ -1,0 +1,16 @@
+.twoState{
+    height: 150px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.oneState{
+    text-align: center;
+}
+
+.oneDetailState{
+    max-width: 100px;
+    max-height: 100px;
+}

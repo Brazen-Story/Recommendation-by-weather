@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import { Request, Response } from 'express';
 import { format } from 'date-fns';
-import Redis from 'ioredis';
-
+// 예: controller에서 사용하는 경우
+import  { redis }  from '../db/redis';
 import { connection } from '../db/config';
 import { MysqlError } from 'mysql';
 import mysql from 'mysql';
@@ -119,9 +119,6 @@ export const getDayLightCycle = async (req:Request, res: Response) => {
   });
 
 }
-
-
-const redis = new Redis(); // Redis 클라이언트 생성 (설정에 맞게 수정 필요)
 
 export const getYoutubeVideos = async (req: Request, res: Response) => {
   const currentHour = new Date().getHours();

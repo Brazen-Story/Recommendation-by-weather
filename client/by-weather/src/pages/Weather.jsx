@@ -11,43 +11,48 @@ import NewsVideio from "../component/NewsVideo";
 
 function Weather(props) {
 
-  const location = useLocation();
-  const place = location.state?.place;
+    const location = useLocation();
+    const place = location.state?.place;
 
-  return (
-    <>
-      <div className="wrap">
-        <div className="header">
-          <div className="header_inner">
-            <h2 className="Htitle" style={{ fontFamily: 'Dancing Script' }}>Fashion Diary</h2>
-          </div>
-        </div>
-        <div className="weather_container">
-          <div className="root">
-            <div className="container_left">
-            <p className="tab_title">레이더 영상</p>
-              <RadarImage />
+    return (
+        <>
+            <div className="wrap">
+                <div className="header">
+                    <div className="header_inner">
+                        <h2 className="Htitle" style={{ fontFamily: 'Dancing Script' }}>Today's Weather</h2>
+                    </div>
+                </div>
+                <div className="weather_container clearfix">
+                    <div className="container_left">
+                        <p className="tab_title">레이더 영상</p>
+                        <RadarImage />
+                    </div>
+                    <div className="container_right">
+                        <div>
+                            <p className="tab_title">기상 속보</p>
+                            <SpecialWeather />
+                            <br></br>
+
+                            <p className="tab_title">미세먼지 현황</p>
+                            <FindDust />
+                            <br></br>
+                            <p className="tab_title">일출·일몰</p>
+                            <DaylightCycle place={place} />
+                            <br></br>
+                        </div>
+                    </div>
+                    <div className="container_bottom">
+                        <br></br>
+                        <p className="tab_title">날씨 뉴스</p>
+                        <NewsVideio />
+                    </div>
+                </div>
+                <div className="footer">
+                </div>
             </div>
-            <div className="container_right">
-              <div>
-                <p className="tab_title">기상 속보</p>
-                <br></br>
-                <SpecialWeather />
-                <p className="tab_title">미세먼지 현황</p>
-                <br></br>
-                <FindDust />
-                <br></br>
-                <p className="tab_title">일출·일몰</p>
-                <DaylightCycle place={place} />
-                <br></br>
-                <NewsVideio />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  )
+
+        </>
+    )
 
 }
 

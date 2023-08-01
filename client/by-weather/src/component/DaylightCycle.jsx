@@ -3,7 +3,7 @@ import axios from "axios";
 import { changedName } from "../utils/ReportRoutes";
 import sunriseImage from '../image/sunrise.png';
 import sunsetImage from '../image/sunset.png';
-
+import '../css/daylightcycle.css'
 function DaylightCycle(props) {
 
     const [locationKoreanName, setLocationKoreanName] = useState("");
@@ -70,13 +70,13 @@ function DaylightCycle(props) {
 
     return (
         <>
-        <div style={{ height: '150px', backgroundColor: 'white', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-            <div style={{ textAlign: 'center' }}>
-                <img src={sunriseImage} alt="sunrise" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+        <div className="twoState">
+            <div className="oneState">
+                <img src={sunriseImage} alt="sunrise" className="oneDetailState" />
                 <p>{data.sunrise ? formatTime(data.sunrise) : 'Loading...'}</p>
             </div>
-            <div style={{ textAlign: 'center' }}>
-                <img src={sunsetImage} alt="sunset" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+            <div className="oneState">
+                <img src={sunsetImage} alt="sunset" className="oneDetailState" />
                 <p>{data.sunrise ? formatTime(data.sunset) : 'Loading...'}</p>
             </div>
         </div>
