@@ -3,8 +3,8 @@ import { getFindDust, getWeather, getWthrBrkNews, getDayLightCycle, getYoutubeVi
 
 export const weatherRoutes: Router = Router();
 
-weatherRoutes.post('/raider', getWeather);
-weatherRoutes.get('/WthrWrnInfoService', getWthrBrkNews);
+weatherRoutes.post('/radar', getWeather);
+weatherRoutes.get('/WthrWrnInfo', getWthrBrkNews);
 weatherRoutes.get('/finddust', getFindDust);
 weatherRoutes.post('/lightCycle', getDayLightCycle);
-weatherRoutes.get('/youtubeapi', getYoutubeVideos);
+weatherRoutes.get('/youtubedata', getYoutubeVideos);

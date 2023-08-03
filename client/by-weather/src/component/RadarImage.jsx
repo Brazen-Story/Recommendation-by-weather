@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../css/Radar.css'
-
+import { radarInfoUrl } from '../utils/WeatherRoutes';
 const RadarImage = () => {
   const [radarImages, setRadarImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -9,7 +9,7 @@ const RadarImage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('http://localhost:3001/weather/raider');
+        const response = await axios.post(radarInfoUrl);
         const imageUrls = response.data['rdr-img-file'].split(',');
         setRadarImages(imageUrls);
       } catch (error) {

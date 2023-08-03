@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../css/finddust.css'
+import { finddustURL } from '../utils/WeatherRoutes';
 const FindDust = () => {
 
   const [findDust, setFindDust] = useState([]);
@@ -9,7 +10,7 @@ const FindDust = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/weather/finddust');
+        const response = await axios.get(finddustURL);
         setFindDust(response.data)
         if (findDust.length === 0) {
           setState("공기질 좋음");

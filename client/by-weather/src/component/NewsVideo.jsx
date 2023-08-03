@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Scrollbars } from 'react-custom-scrollbars';
 import '../css/video.css'
+import { youtubeDataURL } from '../utils/WeatherRoutes';
 
 function NewsVideio() {
 
@@ -10,7 +11,7 @@ function NewsVideio() {
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const res = await axios.get('http://localhost:3001/weather/youtubeapi');  // 여기는 서버로부터 비디오 데이터를 가져오는 API 경로로 변경해야 합니다.
+                const res = await axios.get(youtubeDataURL);  // 여기는 서버로부터 비디오 데이터를 가져오는 API 경로로 변경해야 합니다.
                 setVideos(res.data);
                 console.log(res.data);
             } catch (error) {

@@ -3,9 +3,6 @@ import { Request, Response } from 'express';
 import { format } from 'date-fns';
 // 예: controller에서 사용하는 경우
 import  { redis }  from '../db/redis';
-import { connection } from '../db/config';
-import { MysqlError } from 'mysql';
-import mysql from 'mysql';
 
 const currentDate = format(new Date(), 'yyyyMMdd'); // 현재 날짜 (yyyyMMdd)
 

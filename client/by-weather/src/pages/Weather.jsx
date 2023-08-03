@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useLocation } from 'react-router-dom';
-import axios from "axios";
-import { villageWeathers } from "../utils/WeatherRoutes";
 import RadarImage from "../component/RadarImage";
 import SpecialWeather from "../component/SpecialWeather";
 import FindDust from "../component/FindDust";
 import '../css/Weather.css'
 import DaylightCycle from "../component/DaylightCycle";
 import NewsVideio from "../component/NewsVideo";
+import CCBYND from '../image/CC BY-ND.png'
+import openType from'../image/img_opentype01.jpg';
 
 function Weather(props) {
 
@@ -48,8 +48,21 @@ function Weather(props) {
                     </div>
                 </div>
                 <div className="footer">
+                    <div>
+                        <br /> <strong> 공공데이터포털 API 활용</strong> <br/> <br/>
+                        <span className="footer_api_names">한국천문연구원_출몰시각 정보</span> <br/>
+                        <span className="footer_api_names">한국환경공단_에어코리아_미세먼지 경보 발령 현황</span> <br/>
+                        <span className="footer_api_names"> 기상청_기상특보 조회서비스</span> <br/>
+                        <span className="footer_api_names">기상청_레이더영상 조회서비스</span> <br/>
+                    </div>
+                    <div>
+                    <img className="CCBYND" src={CCBYND} alt="Description of the image" /> {" "}
+                    <img className="openType" src={openType} alt="Description of the image" />
+
+                    </div>
                 </div>
             </div>
+
 
         </>
     )

@@ -4,6 +4,8 @@ import { changedName } from "../utils/ReportRoutes";
 import sunriseImage from '../image/sunrise.png';
 import sunsetImage from '../image/sunset.png';
 import '../css/daylightcycle.css'
+import { ligthCycleURL } from "../utils/WeatherRoutes";
+
 function DaylightCycle(props) {
 
     const [locationKoreanName, setLocationKoreanName] = useState("");
@@ -33,7 +35,7 @@ function DaylightCycle(props) {
         const fetchData = async () => {
             try {
                 const response = await axios({
-                    url: 'http://localhost:3001/weather/lightCycle',
+                    url: ligthCycleURL,
                     method: "POST",
                     withCredentials: true,
                     data: {

@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios'
 import { Scrollbars } from 'react-custom-scrollbars';
 import '../css/wthrwrninfo.css'
+import { WthrWrnInfoURL } from "../utils/WeatherRoutes";
 const WthrWrnInfo = () => {
 
     const [specialReports, setSpecialReports] = useState([]);
 
     const getWthrBrkNews = async () => {
-        const response = await axios.get('http://localhost:3001/weather/WthrWrnInfoService')
+        const response = await axios.get(WthrWrnInfoURL)
         setSpecialReports(response.data);
     }
 

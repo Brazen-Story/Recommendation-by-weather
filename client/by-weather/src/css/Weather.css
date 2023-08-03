@@ -34,8 +34,10 @@
 }
 
 .footer {
+    height: 200px;
     border-top: 1px solid #ebebeb;
-    background-color: #f5f6f7;
+    background-color: #ebebeb;
+    text-align: center;
 }
 
 #footer .footer_inner {
@@ -53,4 +55,12 @@
     content: "";
     display: table;
     clear: both;
+}
+
+strong{
+    font-size: 18px;
+}
+
+.footer_api_names{
+    font-size: 15px;
 }
